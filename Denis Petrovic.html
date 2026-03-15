@@ -39,26 +39,19 @@ font-size:22px;
 font-weight:700;
 }
 
-nav a{
-margin-left:20px;
-text-decoration:none;
-color:#222;
-}
-
 /* HERO */
 
 .hero{
-height:80vh;
+height:90vh;
 background:url("bilder/art1.jpg") center/cover;
 display:flex;
 align-items:center;
 justify-content:center;
-text-align:center;
 }
 
 .hero h1{
-font-size:50px;
-background:rgba(255,255,255,0.8);
+font-size:55px;
+background:rgba(255,255,255,0.85);
 padding:25px;
 border-radius:10px;
 }
@@ -66,57 +59,62 @@ border-radius:10px;
 /* SECTION */
 
 section{
-padding:80px 10%;
+padding:100px 10%;
 }
 
 .title{
 text-align:center;
-margin-bottom:50px;
-font-size:34px;
+margin-bottom:60px;
+font-size:36px;
 }
 
-/* GALLERY */
+/* PINTEREST STYLE GALLERY */
 
 .gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
+column-count:3;
+column-gap:20px;
 }
 
-.art{
-background:#fafafa;
+.gallery-item{
+break-inside:avoid;
+margin-bottom:20px;
+position:relative;
+}
+
+.gallery img{
+width:100%;
 border-radius:12px;
-overflow:hidden;
+cursor:pointer;
 transition:0.3s;
 }
 
-.art:hover{
-transform:translateY(-8px);
+.gallery img:hover{
+transform:scale(1.02);
 }
 
-.art img{
-width:100%;
-height:280px;
-object-fit:cover;
-cursor:pointer;
+.price-tag{
+position:absolute;
+bottom:10px;
+left:10px;
+background:white;
+padding:6px 12px;
+border-radius:6px;
+font-weight:500;
 }
 
-.info{
-padding:20px;
+/* BUY BUTTON */
+
+.buy{
+margin-top:10px;
+display:block;
 text-align:center;
 }
 
-.price{
-margin-top:10px;
-font-weight:bold;
-}
-
-button{
-margin-top:15px;
+.buy button{
 padding:10px 20px;
-border:none;
 background:black;
 color:white;
+border:none;
 border-radius:6px;
 cursor:pointer;
 }
@@ -140,49 +138,39 @@ max-width:90%;
 max-height:90%;
 }
 
-/* SCROLL ART */
+/* SCROLL STORY */
 
-.scroll-art{
-padding:100px 10%;
-background:white;
+.story{
+text-align:center;
 }
 
-.scroll-container{
-display:flex;
-flex-direction:column;
-gap:80px;
-align-items:center;
-}
-
-.scroll-img{
+.story img{
 width:80%;
 max-width:900px;
+margin:80px auto;
+display:block;
 opacity:0;
-transform:translateY(80px);
+transform:translateY(100px);
 transition:1s;
 }
 
-.scroll-img.visible{
+.story img.visible{
 opacity:1;
 transform:translateY(0);
 }
 
-/* ABOUT */
+/* CONTACT */
 
-.about{
-max-width:800px;
-margin:auto;
+.contact{
 text-align:center;
-line-height:1.7;
+font-size:18px;
 }
 
-/* FOOTER */
-
 footer{
-background:#f5f5f5;
+margin-top:100px;
 padding:40px;
 text-align:center;
-margin-top:60px;
+background:#f5f5f5;
 }
 
 </style>
@@ -195,57 +183,50 @@ margin-top:60px;
 
 <div class="logo">agugulu_art</div>
 
-<nav>
-<a href="#">Home</a>
-<a href="#gallery">Galerie</a>
-<a href="#about">Über</a>
-<a href="#contact">Kontakt</a>
-</nav>
-
 </header>
 
 <div class="hero">
 <h1>Art by Petrovic Denis</h1>
 </div>
 
-<section id="gallery">
+<section>
 
 <h2 class="title">Kunstwerke</h2>
 
 <div class="gallery">
 
-<div class="art">
+<div class="gallery-item">
 
 <img src="bilder/art1.jpg">
 
-<div class="info">
+<div class="price-tag">7430 €</div>
 
-<h3>Golden Abstract Face</h3>
+<div class="buy">
 
-<p>Acryl & Mixed Media</p>
-
-<p class="price">7430 €</p>
+<a href="#contact">
 
 <button>Kaufen mit Karte</button>
 
-</div>
+</a>
 
 </div>
 
+</div>
 
-<div class="art">
+
+<div class="gallery-item">
 
 <img src="bilder/art2.jpg">
 
-<div class="info">
+<div class="price-tag">1600 €</div>
 
-<h3>Cosmic Blue Face</h3>
+<div class="buy">
 
-<p>Acryl & Mixed Media</p>
-
-<p class="price">1600 €</p>
+<a href="#contact">
 
 <button>Kaufen mit Karte</button>
+
+</a>
 
 </div>
 
@@ -255,11 +236,9 @@ margin-top:60px;
 
 </section>
 
-<section class="scroll-art">
+<section class="story">
 
-<h2 class="title">Cosmic Blue Face – Details</h2>
-
-<div class="scroll-container">
+<h2 class="title">Cosmic Blue Face – Detail Story</h2>
 
 <img src="bilder/art2.jpg" class="scroll-img">
 
@@ -269,31 +248,13 @@ margin-top:60px;
 
 <img src="bilder/detail3.jpg" class="scroll-img">
 
-</div>
-
-</section>
-
-<section id="about">
-
-<h2 class="title">Über den Künstler</h2>
-
-<div class="about">
-
-<p>
-Ich bin <b>Petrovic Denis</b>, Künstler hinter <b>agugulu_art</b>.
-Meine Werke verbinden Emotion, Farbe und moderne Kunst.
-Jedes Kunstwerk ist ein handgemaltes Original.
-</p>
-
-</div>
-
 </section>
 
 <section id="contact">
 
 <h2 class="title">Kontakt</h2>
 
-<div class="about">
+<div class="contact">
 
 <p>Email: denispetro@hotmail.com</p>
 
@@ -315,13 +276,13 @@ Jedes Kunstwerk ist ein handgemaltes Original.
 
 <script>
 
-/* LIGHTBOX */
+/* IMAGE ZOOM */
 
-let images=document.querySelectorAll(".art img")
+let imgs=document.querySelectorAll(".gallery img")
 let lightbox=document.getElementById("lightbox")
 let lightboxImg=document.getElementById("lightbox-img")
 
-images.forEach(img=>{
+imgs.forEach(img=>{
 img.addEventListener("click",()=>{
 lightbox.style.display="flex"
 lightboxImg.src=img.src
@@ -332,7 +293,7 @@ lightbox.addEventListener("click",()=>{
 lightbox.style.display="none"
 })
 
-/* SCROLL ANIMATION */
+/* SCROLL STORY */
 
 const scrollImages=document.querySelectorAll(".scroll-img")
 
