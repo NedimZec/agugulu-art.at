@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,7 +31,6 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 10%;
-background:white;
 box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
@@ -41,15 +41,15 @@ font-weight:700;
 
 nav a{
 margin-left:20px;
-color:#222;
 text-decoration:none;
+color:#222;
 }
 
 /* HERO */
 
 .hero{
 height:80vh;
-background:url("https://images.unsplash.com/photo-1513364776144-60967b0f800f") center/cover;
+background:url("bilder/art1.jpg") center/cover;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -117,8 +117,8 @@ padding:10px 20px;
 border:none;
 background:black;
 color:white;
-cursor:pointer;
 border-radius:6px;
+cursor:pointer;
 }
 
 /* LIGHTBOX */
@@ -140,6 +140,33 @@ max-width:90%;
 max-height:90%;
 }
 
+/* SCROLL ART */
+
+.scroll-art{
+padding:100px 10%;
+background:white;
+}
+
+.scroll-container{
+display:flex;
+flex-direction:column;
+gap:80px;
+align-items:center;
+}
+
+.scroll-img{
+width:80%;
+max-width:900px;
+opacity:0;
+transform:translateY(80px);
+transition:1s;
+}
+
+.scroll-img.visible{
+opacity:1;
+transform:translateY(0);
+}
+
 /* ABOUT */
 
 .about{
@@ -159,6 +186,7 @@ margin-top:60px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -187,34 +215,59 @@ margin-top:60px;
 <div class="gallery">
 
 <div class="art">
-<img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5">
+
+<img src="bilder/art1.jpg">
+
 <div class="info">
-<h3>Abstract Emotion</h3>
-<p>Acryl auf Leinwand</p>
-<p class="price">€420</p>
+
+<h3>Golden Abstract Face</h3>
+
+<p>Acryl & Mixed Media</p>
+
+<p class="price">7430 €</p>
+
 <button>Kaufen mit Karte</button>
-</div>
+
 </div>
 
-<div class="art">
-<img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968">
-<div class="info">
-<h3>Golden Horizon</h3>
-<p>Öl auf Leinwand</p>
-<p class="price">€480</p>
-<button>Kaufen mit Karte</button>
-</div>
 </div>
 
+
 <div class="art">
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+
+<img src="bilder/art2.jpg">
+
 <div class="info">
-<h3>Modern Landscape</h3>
-<p>Acryl auf Leinwand</p>
-<p class="price">€500</p>
+
+<h3>Cosmic Blue Face</h3>
+
+<p>Acryl & Mixed Media</p>
+
+<p class="price">1600 €</p>
+
 <button>Kaufen mit Karte</button>
+
 </div>
+
 </div>
+
+</div>
+
+</section>
+
+<section class="scroll-art">
+
+<h2 class="title">Cosmic Blue Face – Details</h2>
+
+<div class="scroll-container">
+
+<img src="bilder/art2.jpg" class="scroll-img">
+
+<img src="bilder/detail1.jpg" class="scroll-img">
+
+<img src="bilder/detail2.jpg" class="scroll-img">
+
+<img src="bilder/detail3.jpg" class="scroll-img">
 
 </div>
 
@@ -227,8 +280,8 @@ margin-top:60px;
 <div class="about">
 
 <p>
-Ich bin <b>Petrovic Denis</b>, Künstler hinter <b>agugulu_art</b>.  
-Meine Werke verbinden Emotion, Farbe und moderne Kunst.  
+Ich bin <b>Petrovic Denis</b>, Künstler hinter <b>agugulu_art</b>.
+Meine Werke verbinden Emotion, Farbe und moderne Kunst.
 Jedes Kunstwerk ist ein handgemaltes Original.
 </p>
 
@@ -243,6 +296,7 @@ Jedes Kunstwerk ist ein handgemaltes Original.
 <div class="about">
 
 <p>Email: denispetro@hotmail.com</p>
+
 <p>Instagram: @agugulu_art</p>
 
 </div>
@@ -261,6 +315,8 @@ Jedes Kunstwerk ist ein handgemaltes Original.
 
 <script>
 
+/* LIGHTBOX */
+
 let images=document.querySelectorAll(".art img")
 let lightbox=document.getElementById("lightbox")
 let lightboxImg=document.getElementById("lightbox-img")
@@ -275,6 +331,27 @@ lightboxImg.src=img.src
 lightbox.addEventListener("click",()=>{
 lightbox.style.display="none"
 })
+
+/* SCROLL ANIMATION */
+
+const scrollImages=document.querySelectorAll(".scroll-img")
+
+function reveal(){
+
+scrollImages.forEach(img=>{
+
+const top=img.getBoundingClientRect().top
+const windowHeight=window.innerHeight
+
+if(top < windowHeight - 100){
+img.classList.add("visible")
+}
+
+})
+
+}
+
+window.addEventListener("scroll",reveal)
 
 </script>
 
