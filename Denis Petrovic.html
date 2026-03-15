@@ -1,0 +1,283 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>agugulu_art | Petrovic Denis</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:white;
+color:#222;
+}
+
+/* HEADER */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 10%;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+}
+
+nav a{
+margin-left:20px;
+color:#222;
+text-decoration:none;
+}
+
+/* HERO */
+
+.hero{
+height:80vh;
+background:url("https://images.unsplash.com/photo-1513364776144-60967b0f800f") center/cover;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.hero h1{
+font-size:50px;
+background:rgba(255,255,255,0.8);
+padding:25px;
+border-radius:10px;
+}
+
+/* SECTION */
+
+section{
+padding:80px 10%;
+}
+
+.title{
+text-align:center;
+margin-bottom:50px;
+font-size:34px;
+}
+
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+.art{
+background:#fafafa;
+border-radius:12px;
+overflow:hidden;
+transition:0.3s;
+}
+
+.art:hover{
+transform:translateY(-8px);
+}
+
+.art img{
+width:100%;
+height:280px;
+object-fit:cover;
+cursor:pointer;
+}
+
+.info{
+padding:20px;
+text-align:center;
+}
+
+.price{
+margin-top:10px;
+font-weight:bold;
+}
+
+button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+background:black;
+color:white;
+cursor:pointer;
+border-radius:6px;
+}
+
+/* LIGHTBOX */
+
+.lightbox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+}
+
+/* ABOUT */
+
+.about{
+max-width:800px;
+margin:auto;
+text-align:center;
+line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+background:#f5f5f5;
+padding:40px;
+text-align:center;
+margin-top:60px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">agugulu_art</div>
+
+<nav>
+<a href="#">Home</a>
+<a href="#gallery">Galerie</a>
+<a href="#about">Über</a>
+<a href="#contact">Kontakt</a>
+</nav>
+
+</header>
+
+<div class="hero">
+<h1>Art by Petrovic Denis</h1>
+</div>
+
+<section id="gallery">
+
+<h2 class="title">Kunstwerke</h2>
+
+<div class="gallery">
+
+<div class="art">
+<img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5">
+<div class="info">
+<h3>Abstract Emotion</h3>
+<p>Acryl auf Leinwand</p>
+<p class="price">€420</p>
+<button>Kaufen mit Karte</button>
+</div>
+</div>
+
+<div class="art">
+<img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968">
+<div class="info">
+<h3>Golden Horizon</h3>
+<p>Öl auf Leinwand</p>
+<p class="price">€480</p>
+<button>Kaufen mit Karte</button>
+</div>
+</div>
+
+<div class="art">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+<div class="info">
+<h3>Modern Landscape</h3>
+<p>Acryl auf Leinwand</p>
+<p class="price">€500</p>
+<button>Kaufen mit Karte</button>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2 class="title">Über den Künstler</h2>
+
+<div class="about">
+
+<p>
+Ich bin <b>Petrovic Denis</b>, Künstler hinter <b>agugulu_art</b>.  
+Meine Werke verbinden Emotion, Farbe und moderne Kunst.  
+Jedes Kunstwerk ist ein handgemaltes Original.
+</p>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<h2 class="title">Kontakt</h2>
+
+<div class="about">
+
+<p>Email: denispetro@hotmail.com</p>
+<p>Instagram: @agugulu_art</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 agugulu_art | Petrovic Denis</p>
+
+</footer>
+
+<div class="lightbox" id="lightbox">
+<img id="lightbox-img">
+</div>
+
+<script>
+
+let images=document.querySelectorAll(".art img")
+let lightbox=document.getElementById("lightbox")
+let lightboxImg=document.getElementById("lightbox-img")
+
+images.forEach(img=>{
+img.addEventListener("click",()=>{
+lightbox.style.display="flex"
+lightboxImg.src=img.src
+})
+})
+
+lightbox.addEventListener("click",()=>{
+lightbox.style.display="none"
+})
+
+</script>
+
+</body>
+</html>
+```
