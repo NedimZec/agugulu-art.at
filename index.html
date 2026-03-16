@@ -296,7 +296,7 @@ position:relative;
           <p class="info">Medium: Acryl</p>
           <p class="info">Leinwand: 100x100cm</p>
           <p class="price">7430 €</p>
-<button onclick="openForm()">Kunstwerk anfragen</button>
+<button onclick="openForm('Ornamentum I')">Kunstwerk anfragen</button>
         </div>
 
         <div class="art">
@@ -309,7 +309,7 @@ position:relative;
           <p class="info">Leinwand: 100x100cm</p>
           <p class="price">1600 €</p>
 
-         <button onclick="openForm()">Kunstwerk anfragen</button>
+         <button onclick="openForm('Ornamentum II')">Kunstwerk anfragen</button>
         </div>
       </div>
     </section>
@@ -416,6 +416,21 @@ onclick="openSold('ruhe_kraft')">
     </section>
 
      <!-- Anfrage Popup -->
+    <form action="mailto:denispetro2@hotmail.com" method="post" enctype="text/plain">
+
+<h3>Kunstwerk Anfrage</h3>
+
+<input type="hidden" id="artworkName" name="Kunstwerk">
+
+<input type="text" name="Name" placeholder="Name" required><br><br>
+
+<input type="email" name="Email" placeholder="E-Mail" required><br><br>
+
+<textarea name="Nachricht" placeholder="Ihre Nachricht..." required></textarea><br><br>
+
+<button type="submit">Anfrage senden</button>
+
+</form>
 
     <div class="popup" id="popup">
       <div class="popup-content">
@@ -544,6 +559,13 @@ thumbs.appendChild(image);
       }
 
       /* Anfrage */
+      function openForm(artwork){
+
+document.getElementById("popup").style.display="flex";
+
+document.getElementById("artworkName").value = artwork;
+
+}
 
       function openForm() {
         document.getElementById("popup").style.display = "flex";
