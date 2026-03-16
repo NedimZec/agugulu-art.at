@@ -220,6 +220,44 @@ padding:20px;
 }
 
 }
+      .menu-toggle{
+display:none;
+font-size:30px;
+cursor:pointer;
+}
+
+@media (max-width:768px){
+
+nav{
+display:none;
+flex-direction:column;
+text-align:center;
+background:white;
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+border-top:1px solid #eee;
+}
+
+nav a{
+padding:15px;
+display:block;
+}
+
+.menu-toggle{
+display:block;
+}
+
+nav.active{
+display:flex;
+}
+
+header{
+position:relative;
+}
+
+}
     </style>
   </head>
 
@@ -419,6 +457,13 @@ onclick="openSold('ruhe_kraft')">
     </div>
 
     <script>
+      function toggleMenu(){
+
+let menu=document.getElementById("menu");
+
+menu.classList.toggle("active");
+
+}
       function openSold(work){
 
 document.getElementById("soldViewer").style.display = "flex";
