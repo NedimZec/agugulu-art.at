@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>AGUGULU ART | Petrovic Denis</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial;
+        background: white;
+        color: #111;
+      }
+
+      /* Navigation */
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 8%;
+        border-bottom: 1px solid #eee;
+      }
+      .soldBig {
+        max-width: 200px;
+        width: 100%;
+        height: auto;
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      nav a {
+        margin-left: 25px;
+        text-decoration: none;
+        color: black;
+      }
+
+      /* Hero */
+
+      .hero {
+        height: 50vh;
+        background-image: url("bilder/ornamentum1.jpg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      .hero h1 {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px 40px;
+        font-size: 50px;
+      }
+
+      /* Sections */
+
+      section {
+        padding: 50px 10%;
+      }
+
+      /* Galerie */
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 80px;
+        text-align: center;
+      }
+
+      /* Alle Bilder gleiche Größe */
+
+      .gallery img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        margin: auto;
+        display: block;
+      }
+
+      /* Sold Bilder */
+
+      #verkauft .art img {
+        width: 100%;
+        max-width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin: auto;
+        display: block;
+      }
+
+      .art img {
+        width: 60%;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .art img:hover {
+        transform: scale(1.05);
+      }
+
+      .info {
+        color: #666;
+        font-size: 14px;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        border: none;
+        background: black;
+        color: white;
+        cursor: pointer;
+      }
+
+      .sold {
+        color: red;
+        font-weight: bold;
+      }
+
+      /* Popup */
+
+      .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(243, 241, 241, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 800;
+      }
+
+      .popup-content {
+        background: rgb(248, 245, 245);
+        padding: 50px;
+        max-width: 400px;
+        text-align: center;
+        position: relative;
+      }
+
+      .close {
+        position: static;
+        top: 250px;
+        right: 200px;
+        font-size: 20px;
+        cursor: pointer;
+        position: sticky;
+      }
+
+      /* thumbnails */
+
+      .thumbs{
+       display:flex;
+       gap:10px;
+       justify-content:center;
+       margin-top:20px;
+      }
+
+       .thumbs img{
+      width:80px;
+      height:80px;
+      object-fit:cover;
+      cursor:pointer;
+      }
+
+      .backBtn {
+        margin-top: 40px;
+        padding: 12px 25px;
+        background: black;
+        color: rgb(251, 248, 248);
+        border: none;
+        cursor: pointer;
+      }
+      #soldBigImage{
+max-width:800px;
+width:90%;
+height:auto;
+display:block;
+margin:auto;
+}
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">AGUGULU_ART</div>
+
+      <nav>
+        <a href="#">Startseite</a>
+        <a href="#originale">Originale</a>
+        <a href="#verkauft">Verkauft</a>
+        <a href="#about">Über den Künstler</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>AGUGULU_ART<br />Petrovic Denis</h1>
+    </div>
+
+    <!-- ORIGINAL WERKE -->
+
+    <section id="originale">
+      <h2>Original Werke</h2>
+
+      <div class="gallery">
+        <div class="art">
+          <img src="bilder/ornamentum1.jpg" onclick="openArt(this)" />
+
+          <h3>Ornamentum I</h3>
+
+          <p class="info">Medium: Acryl</p>
+          <p class="info">Leinwand: 100x100cm</p>
+          <p class="price">7430 €</p>
+
+          <button onclick="openForm()">Kunstwerk anfragen</button>
+        </div>
+
+        <div class="art">
+          <a href="art2.html">
+            <img src="bilder/ornamentum2.jpg" onclick="openArt(this)" />
+          </a>
+          <h3>Ornamentum II</h3>
+
+          <p class="info">Medium: Acryl</p>
+          <p class="info">Leinwand: 100x100cm</p>
+          <p class="price">1600 €</p>
+
+          <button onclick="openForm()">Kunstwerk anfragen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERKAUFTE WERKE -->
+
+    <section id="verkauft">
+
+<h2>Verkaufte Werke</h2>
+
+<div class="gallery">
+
+<div class="art">
+
+<img src="bilder/sold_main.jpg" onclick="openSold('zaehmung_des_lichts')">
+
+<h3>Zähmung des Lichts</h3>
+<p class="info">Medium: Acryl, Strukturpaste, Blattgold</p>
+<p class="info">Leinwand: 140x100 cm</p>
+
+<p class="sold">VERKAUFT</p>
+
+</div>
+
+<div class="art">
+
+<img src="bilder/zwischen_genuss_und_leidenschaft.jpg"
+onclick="openSold('zwischen_genuss_und_leidenschaft')">
+
+<h3>Zwischen Genuss und Leidenschaft</h3>
+<p class="info">Medium: Acryl, Strukturpaste, Blattgold</p>
+<p class="info">Leinwand: 120x80 cm</p>
+
+<p class="sold">VERKAUFT</p>
+
+</div>
+<div class="art">
+
+<img src="bilder/Diva Toscana.jpg"
+onclick="openSold('diva_toscana')">
+
+<h3>Diva Toscana</h3>
+
+<p class="info">Medium: Acryl, Strukturpaste, Blattgold</p>
+<p class="info">Leinwand: 100x100 cm</p>
+
+<p class="sold">VERKAUFT</p>
+
+</div>
+<div class="art">
+
+<img src="bilder/In der Ruhe liegt die Kraft.jpg"
+onclick="openSold('ruhe_kraft')">
+
+<h3>In der Ruhe liegt die Kraft</h3>
+
+<p class="info">Medium: Acryl, Glas, Strukturpaste</p>
+<p class="info">Leinwand: 100x100 cm</p>
+
+<p class="sold">VERKAUFT</p>
+
+</div>
+</div>
+
+</section>
+    </section>
+
+    <!-- ABOUT -->
+
+    <section id="about">
+      <h2>Über den Künstler</h2>
+
+      <p>
+        „Ich schlief, als die Geister tanzten, dann tanzte ich mit meinen
+        Geistern mit.“
+      </p>
+
+      <p>
+        Petrovic Denis ist ein autodidaktischer Künstler, der durch einen
+        glücklichen Zufall zur Malerei fand. Im November 2023, inspiriert durch
+        seinen Sohn, wagte er das erste Mal kreativ zu experimentieren. Was als
+        spontaner Kauf von Farbe und Leinwand begann, entwickelte sich schnell
+        zu einer tiefen Leidenschaft für die Kunst.
+      </p>
+
+      <p>
+        Petrovic Denis arbeitet bevorzugt mit Acrylfarben, Blattgold und
+        Strukturpaste, um eindrucksvolle Werke zu schaffen.
+      </p>
+    </section>
+
+    <!-- KONTAKT -->
+
+    <section id="kontakt">
+      <h2>Kontakt</h2>
+
+      <p>Email: denispetro2@hotmail.com</p>
+
+      <p>
+        <a href="https://www.instagram.com/agugulu_art/" target="_blank">
+          Instagram: @agugulu_art
+        </a>
+      </p>
+    </section>
+
+     <!-- Anfrage Popup -->
+
+    <div class="popup" id="popup">
+      <div class="popup-content">
+        <h3>Kunstwerk Anfrage</h3>
+
+        <input type="text" placeholder="Name" /><br /><br />
+        <input type="email" placeholder="E-Mail" /><br /><br />
+        <textarea placeholder="Nachricht"></textarea><br /><br />
+
+        <button>Anfrage senden</button>
+      </div>
+    </div>
+
+    <!-- SOLD GALERIE -->
+
+    <div class="popup" id="soldViewer">
+      <div class="popup-content">
+        <img id="soldBigImage" src="bilder/sold_main.jpg"/>
+
+     <div class="thumbs" id="soldThumbs"></div>
+
+        <button class="backBtn" onclick="closeSold()">Zurück</button>
+      </div>
+      
+    </div>
+   
+    
+    
+  
+
+    <!-- ORIGINAL BILD POPUP -->
+
+    <div class="popup" id="artViewer">
+      <div class="popup-content">
+        <img id="artImage" style="max-width: 90%" />
+
+        <button class="backBtn" onclick="closeArt()">Zurück</button>
+      </div>
+    </div>
+
+    <script>
+      function openSold(work){
+
+document.getElementById("soldViewer").style.display = "flex";
+
+let images = [];
+
+if(work === "zaehmung_des_lichts"){
+
+images = [
+"bilder/sold_main.jpg",
+"bilder/sold1.jpg",
+"bilder/sold2.jpg",
+"bilder/sold3.jpg"
+];
+
+}
+
+if(work === "zwischen_genuss_und_leidenschaft"){
+
+images = [
+"bilder/zwischen_genuss_und_leidenschaft.jpg",
+"bilder/zwischen_genuss_und_leidenschaft1.jpg",
+"bilder/zwischen_genuss_und_leidenschaft2.jpg",
+"bilder/zwischen_genuss_und_leidenschaft3.jpg"
+];
+
+}
+if(work === "diva_toscana"){
+images = [
+"bilder/Diva Toscana.jpg",
+"bilder/diva1.jpg",
+"bilder/diva2.jpg",
+"bilder/diva3.jpg",
+"bilder/diva4.jpg",
+];
+}
+
+if(work === "ruhe_kraft"){
+images = [
+"bilder/In der Ruhe liegt die Kraft.jpg",
+"bilder/ruhe1.jpg",
+"bilder/ruhe2.jpg",
+"bilder/ruhe3.jpg",
+"bilder/ruhe4.jpg",
+];
+}
+
+document.getElementById("soldBigImage").src = images[0];
+
+let thumbs = document.getElementById("soldThumbs");
+thumbs.innerHTML = "";
+
+images.forEach(function(img){
+
+let image = document.createElement("img");
+image.src = img;
+
+image.onclick = function(){
+document.getElementById("soldBigImage").src = img;
+};
+
+thumbs.appendChild(image);
+
+});
+
+}
+   
+      
+      /* Original Werke */
+
+      function openArt(img) {
+        document.getElementById("artViewer").style.display = "flex";
+        document.getElementById("artImage").src = img.src;
+      }
+
+      function closeArt() {
+        document.getElementById("artViewer").style.display = "none";
+      }
+
+      /* Anfrage */
+
+      function openForm() {
+        document.getElementById("popup").style.display = "flex";
+      }
+
+      function closeForm() {
+        document.getElementById("popup").style.display = "none";
+      }
+
+      /* Sold Galerie */
+      
+      function closeSold() {
+        document.getElementById("soldViewer").style.display = "none";
+      }
+
+      function changeSold(img) {
+        document.getElementById("soldBigImage").src = img.src;
+      }
+    </script>
+  </body>
+</html>
