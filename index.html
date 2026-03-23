@@ -3,585 +3,1179 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta
+      name="description"
+      content="AGUGULU ART von Petrovic Denis. Originale Acrylwerke, verkaufte Arbeiten und Kontakt zur direkten Anfrage."
+    />
     <title>AGUGULU ART | Petrovic Denis</title>
 
     <style>
+      :root {
+        --bg: #f6f3ee;
+        --surface: #ffffff;
+        --surface-strong: #ffffff;
+        --ink: #181716;
+        --muted: #66615a;
+        --line: rgba(24, 23, 22, 0.12);
+        --accent: #181716;
+        --accent-dark: #181716;
+        --sold: #8a4635;
+        --shadow: 0 18px 40px rgba(24, 23, 22, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
-        font-family: Arial;
-        background: white;
-        color: #111;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--bg);
       }
 
-      /* Navigation */
+      img {
+        max-width: 100%;
+        display: block;
+      }
 
-      header {
+      a {
+        color: inherit;
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+
+      .page-shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto 40px;
+        background: transparent;
+        overflow: hidden;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 20px 8%;
-        border-bottom: 1px solid #eee;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px 32px;
+        background: rgba(246, 243, 238, 0.96);
+        border-bottom: 1px solid var(--line);
       }
-      .soldBig {
-        max-width: 200px;
-        width: 100%;
-        height: auto;
+
+      .logo-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .logo-kicker {
+        font-size: 0.78rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
       }
 
       .logo {
-        font-size: 22px;
-        font-weight: bold;
+        font-family: "Helvetica Neue", "Avenir Next", sans-serif;
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .menu-toggle {
+        display: none;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        padding: 10px 14px;
+        cursor: pointer;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
       }
 
       nav a {
-        margin-left: 25px;
         text-decoration: none;
-        color: black;
+        color: var(--muted);
+        font-size: 0.96rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
 
-      /* Hero */
+      nav a:hover,
+      nav a:focus-visible {
+        color: var(--accent-dark);
+      }
 
       .hero {
-        height: 50vh;
-        background-image: url("bilder/ornamentum1.jpg");
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
+        position: relative;
+        min-height: 70vh;
+        padding: 110px 32px 52px;
+        display: grid;
+        align-items: end;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(18, 16, 14, 0.58) 0%,
+            rgba(18, 16, 14, 0.14) 62%,
+            rgba(18, 16, 14, 0.04) 100%
+          ),
+          url("bilder/ornamentum1.jpg") center 22% / cover no-repeat;
+      }
+
+      .hero::after {
+        display: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 700px;
+        color: #f8f4ef;
+        animation: fadeUp 0.9s ease both;
+      }
+
+      .hero-kicker {
+        margin: 0 0 14px;
+        font-size: 0.84rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
       }
 
       .hero h1 {
-        background: rgba(0, 0, 0, 0.5);
-        padding: 10px 40px;
-        font-size: 50px;
+        margin: 0;
+        font-family: "Helvetica Neue", "Avenir Next", sans-serif;
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        line-height: 0.98;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
       }
 
-      /* Sections */
-
-      section {
-        padding: 50px 10%;
+      .hero p {
+        max-width: 560px;
+        margin: 22px 0 0;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: rgba(248, 244, 239, 0.9);
       }
 
-      /* Galerie */
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 30px;
+      }
+
+      .button,
+      button {
+        display: inline-block;
+        border: 0;
+        padding: 13px 20px;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          transform 0.25s ease,
+          background 0.25s ease,
+          color 0.25s ease;
+      }
+
+      .button:hover,
+      button:hover,
+      .button:focus-visible,
+      button:focus-visible {
+        transform: translateY(-2px);
+      }
+
+      .button-primary,
+      .art button,
+      .form-actions button {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .button-secondary {
+        color: #fff;
+        border: 1px solid rgba(255, 248, 241, 0.42);
+        background: transparent;
+      }
+
+      main section {
+        padding: 34px 32px 56px;
+      }
+
+      .intro-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 24px;
+        margin-top: 0;
+        padding: 0 32px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .intro-card,
+      .note-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+
+      .intro-card {
+        padding: 26px;
+      }
+
+      .intro-card h2,
+      .section-head h2,
+      .note-card h2,
+      .contact-card h2 {
+        margin: 0 0 12px;
+        font-family: "Helvetica Neue", "Avenir Next", sans-serif;
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+
+      .intro-card p,
+      .note-card p,
+      .about-copy p,
+      .contact-copy p {
+        margin: 0;
+        line-height: 1.8;
+        color: var(--muted);
+      }
+
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .fact {
+        padding: 18px;
+        background: #faf8f5;
+        border: 1px solid var(--line);
+      }
+
+      .fact strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1.35rem;
+        font-family: "Helvetica Neue", "Avenir Next", sans-serif;
+        color: var(--accent-dark);
+      }
+
+      .note-card {
+        padding: 26px;
+        align-self: end;
+        background: #fbf9f6;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+
+      .section-head p {
+        max-width: 480px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
 
       .gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 40px;
-        text-align: center;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
       }
 
-      /* Alle Bilder gleiche Größe */
+      .art {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        background: transparent;
+        border: 0;
+        overflow: hidden;
+        transform: translateY(0);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
 
-      .gallery img {
+      .art:hover {
+        transform: translateY(-2px);
+      }
+
+      .art-visual {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4 / 5;
+        background: #ddd6ce;
+      }
+
+      .art-visual img {
         width: 100%;
-        height: 300px;
+        height: 100%;
         object-fit: cover;
-        margin: auto;
-        display: block;
-      }
-
-      /* Sold Bilder */
-
-      #verkauft .art img {
-        width: 100%;
-        max-width: 150px;
-        height: 150px;
-        object-fit: cover;
-        margin: auto;
-        display: block;
-      }
-
-      .art img {
-        width: 60%;
         cursor: pointer;
-        transition: 0.3s;
+        transition: transform 0.5s ease;
       }
 
-      .art img:hover {
+      .art:hover .art-visual img {
         transform: scale(1.05);
       }
 
-      .info {
-        color: #666;
-        font-size: 14px;
+      .art-body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 18px 0 0;
       }
 
-      button {
-        margin-top: 10px;
-        padding: 10px 20px;
-        border: none;
-        background: black;
-        color: white;
-        cursor: pointer;
+      .art-body h3 {
+        margin: 0 0 12px;
+        font-family: "Helvetica Neue", "Avenir Next", sans-serif;
+        font-size: 1.22rem;
+        font-weight: 500;
+      }
+
+      .meta {
+        margin: 0 0 8px;
+        color: var(--muted);
+      }
+
+      .price {
+        margin: 10px 0 18px;
+        font-size: 1.2rem;
+        letter-spacing: 0.04em;
+        color: var(--accent-dark);
       }
 
       .sold {
-        color: red;
-        font-weight: bold;
+        margin-top: 10px;
+        color: var(--sold);
+        font-weight: 700;
+        letter-spacing: 0.08em;
       }
 
-      /* Popup */
+      .sold-gallery .art-visual {
+        aspect-ratio: 1 / 1;
+      }
+
+      .about-grid,
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .about-panel,
+      .contact-card {
+        padding: 28px;
+        background: #fff;
+        border: 1px solid var(--line);
+      }
+
+      .artist-quote {
+        display: flex;
+        align-items: end;
+        min-height: 320px;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(24, 23, 22, 0.06),
+            rgba(24, 23, 22, 0.48)
+          ),
+          url("bilder/background.jpg") center / cover no-repeat;
+        color: #fff4e9;
+      }
+
+      .artist-quote blockquote {
+        margin: 0;
+        max-width: 420px;
+        font-family: "Helvetica Neue", "Avenir Next", sans-serif;
+        font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+        line-height: 1.18;
+      }
+
+      .artist-quote span {
+        display: block;
+        margin-top: 18px;
+        font-size: 0.95rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .contact-copy a:not(.button) {
+        color: var(--accent-dark);
+      }
+
+      .contact-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .footer {
+        padding: 24px 32px 36px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.92rem;
+        background: transparent;
+      }
 
       .popup {
         display: none;
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(243, 241, 241, 0.8);
+        inset: 0;
+        padding: 20px;
+        background: rgba(20, 13, 8, 0.72);
         justify-content: center;
         align-items: center;
-        z-index: 800;
+        z-index: 200;
+      }
+
+      .popup.is-open {
+        display: flex;
       }
 
       .popup-content {
-        background: rgb(248, 245, 245);
-        padding: 50px;
-        max-width: 400px;
-        text-align: center;
         position: relative;
+        width: min(100%, 760px);
+        max-height: 90vh;
+        overflow: auto;
+        padding: 26px;
+        background: var(--surface-strong);
+        box-shadow: 0 28px 60px rgba(24, 23, 22, 0.16);
       }
 
-      .close {
-        position: static;
-        top: 250px;
-        right: 200px;
-        font-size: 20px;
+      .popup-content.viewer {
+        width: min(100%, 980px);
+      }
+
+      .popup-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(31, 26, 23, 0.12);
+        background: rgba(255, 249, 241, 0.92);
+        color: var(--ink);
+      }
+
+      .viewer-image {
+        width: 100%;
+        max-height: 70vh;
+        object-fit: contain;
+        background: #f0e6d9;
+      }
+
+      .thumbs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .thumbs img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
         cursor: pointer;
-        position: sticky;
+        border: 2px solid transparent;
       }
 
-      /* thumbnails */
-
-      .thumbs{
-       display:flex;
-       gap:10px;
-       justify-content:center;
-       margin-top:20px;
+      .thumbs img.active {
+        border-color: var(--accent);
       }
 
-       .thumbs img{
-      width:80px;
-      height:80px;
-      object-fit:cover;
-      cursor:pointer;
+      .form-grid {
+        display: grid;
+        gap: 14px;
       }
 
-      .backBtn {
-        margin-top: 40px;
-        padding: 12px 25px;
-        background: black;
-        color: rgb(251, 248, 248);
-        border: none;
-        cursor: pointer;
+      .form-grid label {
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
       }
-      #soldBigImage{
-max-width:800px;
-width:90%;
-height:auto;
-display:block;
-margin:auto;
-}
-      @media (max-width:768px){
 
-.hero h1{
-font-size:28px;
-padding:10px 20px;
-}
+      .form-grid input,
+      .form-grid textarea {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid rgba(31, 26, 23, 0.12);
+        background: #fff;
+      }
 
-header{
-flex-direction:column;
-gap:10px;
-}
+      .form-grid textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
 
-nav a{
-margin:10px;
-display:inline-block;
-}
+      .form-note {
+        color: var(--muted);
+        line-height: 1.7;
+      }
 
-.gallery{
-grid-template-columns:1fr;
-gap:30px;
-}
+      .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 10px;
+      }
 
-#verkauft .art img{
-max-width:120px;
-height:120px;
-}
+      .form-actions .ghost {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid rgba(31, 26, 23, 0.16);
+      }
 
-.popup-content{
-max-width:90%;
-padding:20px;
-}
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
 
-}
-      .menu-toggle{
-display:none;
-font-size:30px;
-cursor:pointer;
-}
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-@media (max-width:768px){
+      @media (max-width: 920px) {
+        .intro-grid,
+        .about-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
 
-nav{
-display:none;
-flex-direction:column;
-text-align:center;
-background:white;
-position:absolute;
-top:70px;
-left:0;
-width:100%;
-border-top:1px solid #eee;
-}
+        .section-head {
+          flex-direction: column;
+          align-items: start;
+        }
 
-nav a{
-padding:15px;
-display:block;
-}
+        .facts {
+          grid-template-columns: 1fr;
+        }
+      }
 
-.menu-toggle{
-display:block;
-}
+      @media (max-width: 760px) {
+        .page-shell {
+          width: 100%;
+          margin: 0;
+          border: 0;
+        }
 
-nav.active{
-display:flex;
-}
+        .topbar,
+        .hero,
+        main section,
+        .footer {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
 
-header{
-position:relative;
-}
+        .intro-grid {
+          margin-top: 0;
+          padding: 20px;
+        }
 
-}
+        .menu-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 10px 20px 20px;
+          background: rgba(250, 243, 234, 0.98);
+          border-bottom: 1px solid var(--line);
+        }
+
+        nav.active {
+          display: flex;
+        }
+
+        nav a {
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(31, 26, 23, 0.08);
+        }
+
+        .hero {
+          min-height: 62vh;
+          align-items: center;
+        }
+
+        .hero::after {
+          display: none;
+        }
+
+        .hero-actions,
+        .contact-actions,
+        .form-actions {
+          flex-direction: column;
+        }
+
+        .button,
+        button {
+          width: 100%;
+          text-align: center;
+        }
+      }
     </style>
   </head>
 
   <body>
-   <header>
-
-<div class="logo"></div>
-
-<div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-<nav id="menu">
-<a href="#">Startseite</a>
-<a href="#originale">Originale</a>
-<a href="#verkauft">Verkauft</a>
-<a href="#about">Über den Künstler</a>
-<a href="#kontakt">Kontakt</a>
-</nav>
-
-</header>
-
-    <div class="hero">
-      <h1>AGUGULU_ART<br />Petrovic Denis</h1>
-    </div>
-
-    <!-- ORIGINAL WERKE -->
-
-    <section id="originale">
-      <h2>Original Werke</h2>
-
-      <div class="gallery">
-        <div class="art">
-          <img src="bilder/ornamentum1.jpg" onclick="openArt(this)" />
-
-          <h3>Ornamentum I</h3>
-
-          <p class="info">Medium: Acryl</p>
-          <p class="info">Leinwand: 100x100cm</p>
-          <p class="price">7430 €</p>
-<button onclick="openForm('Ornamentum I')">Kunstwerk anfragen</button>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="logo-wrap">
+          <span class="logo-kicker">Original Paintings</span>
+          <div class="logo">AGUGULU ART</div>
         </div>
 
-        <div class="art">
-          <a href="art2.html">
-            <img src="bilder/ornamentum2.jpg" onclick="openArt(this)" />
-          </a>
-          <h3>Ornamentum II</h3>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Menue oeffnen"
+          aria-expanded="false"
+          aria-controls="menu"
+          onclick="toggleMenu()"
+        >
+          Menue
+        </button>
 
-          <p class="info">Medium: Acryl</p>
-          <p class="info">Leinwand: 100x100cm</p>
-          <p class="price">1600 €</p>
+        <nav id="menu">
+          <a href="#start">Start</a>
+          <a href="#originale">Originale</a>
+          <a href="#verkauft">Verkauft</a>
+          <a href="#about">Kuenstler</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+      </header>
 
-         <button onclick="openForm('Ornamentum II')">Kunstwerk anfragen</button>
+      <section class="hero" id="start">
+        <div class="hero-content">
+          <p class="hero-kicker">Acryl, Struktur, Blattgold</p>
+          <h1>Abstrakte Kunst von Petrovic Denis.</h1>
+          <p>
+            Farbe, Form und Struktur. Ausgewaehlte Originale und verkaufte
+            Arbeiten von AGUGULU ART direkt aus dem Atelier.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#originale">Werke ansehen</a>
+            <a class="button button-secondary" href="#kontakt"
+              >Kontakt aufnehmen</a
+            >
+          </div>
         </div>
+      </section>
+
+      <div class="intro-grid">
+        <div class="intro-card">
+          <h2>Malerei mit Charakter</h2>
+          <p>
+            Die Seite ist bewusst ruhig aufgebaut, damit die Werke den Raum
+            bekommen, den sie brauchen. Im Mittelpunkt stehen Materialitaet,
+            Spannung, Oberflaeche und ein klarer Blick auf jedes Bild.
+          </p>
+
+          <div class="facts">
+            <div class="fact">
+              <strong>Seit 2023</strong>
+              <span>Kreativer Weg in die freie Malerei</span>
+            </div>
+            <div class="fact">
+              <strong>Acryl + Gold</strong>
+              <span>Textur, Licht und Oberflaeche als Handschrift</span>
+            </div>
+            <div class="fact">
+              <strong>Direkter Kontakt</strong>
+              <span>Anfragen ohne Umwege per Mail oder Instagram</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="note-card">
+          <h2>Jedes Werk hat seine eigene Spannung</h2>
+          <p>
+            Mit einem Klick auf ein Werk öffnet sich die Grossansicht. Für
+            verfügbare Bilder kann direkt eine Anfrage mit vorausgefuelltem
+            Titel gestartet werden.
+          </p>
+        </aside>
       </div>
-    </section>
 
-    <!-- VERKAUFTE WERKE -->
+      <main>
+        <section id="originale">
+          <div class="section-head">
+            <h2>Originale Werke</h2>
+            <p>
+              Alle hier gezeigten Werke sind aktuell verfuegbar. Ein Klick auf
+              das Bild zeigt dir das Werk grösser.
+            </p>
+          </div>
 
-    <section id="verkauft">
+          <div class="gallery">
+            <article class="art">
+              <div class="art-visual">
+                <img
+                  src="bilder/ornamentum1.jpg"
+                  alt="Ornamentum I"
+                  onclick="openArt(this)"
+                />
+              </div>
+              <div class="art-body">
+                <h3>Ornamentum I</h3>
+                <p class="meta">Medium: Acryl</p>
+                <p class="meta">Leinwand: 100 x 100 cm</p>
+                <p class="price">7430 EUR</p>
+                <button type="button" onclick="openForm('Ornamentum I')">
+                  Kunstwerk anfragen
+                </button>
+              </div>
+            </article>
 
-<h2>Verkaufte Werke</h2>
+            <article class="art">
+              <div class="art-visual">
+                <img
+                  src="bilder/ornamentum2.jpg"
+                  alt="Ornamentum II"
+                  onclick="openArt(this)"
+                />
+              </div>
+              <div class="art-body">
+                <h3>Ornamentum II</h3>
+                <p class="meta">Medium: Acryl</p>
+                <p class="meta">Leinwand: 100 x 100 cm</p>
+                <p class="price">1600 EUR</p>
+                <button type="button" onclick="openForm('Ornamentum II')">
+                  Kunstwerk anfragen
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
 
-<div class="gallery">
+        <section id="verkauft">
+          <div class="section-head">
+            <h2>Verkaufte Werke</h2>
+            <p>
+              Eine Auswahl bereits verkaufter Arbeiten mit weiteren Ansichten
+              und Details der Oberflächen.
+            </p>
+          </div>
 
-<div class="art">
+          <div class="gallery sold-gallery">
+            <article class="art">
+              <div class="art-visual">
+                <img
+                  src="bilder/sold_main.jpg"
+                  alt="Zaehmung des Lichts"
+                  onclick="openSold('zaehmung_des_lichts')"
+                />
+              </div>
+              <div class="art-body">
+                <h3>Zähmung des Lichts</h3>
+                <p class="meta">Medium: Acryl, Strukturpaste, Blattgold</p>
+                <p class="meta">Leinwand: 140 x 100 cm</p>
+                <p class="sold">VERKAUFT</p>
+              </div>
+            </article>
 
-<img src="bilder/sold_main.jpg" onclick="openSold('zaehmung_des_lichts')">
+            <article class="art">
+              <div class="art-visual">
+                <img
+                  src="bilder/zwischen_genuss_und_leidenschaft.jpg"
+                  alt="Zwischen Genuss und Leidenschaft"
+                  onclick="openSold('zwischen_genuss_und_leidenschaft')"
+                />
+              </div>
+              <div class="art-body">
+                <h3>Zwischen Genuss und Leidenschaft</h3>
+                <p class="meta">Medium: Acryl, Strukturpaste, Blattgold</p>
+                <p class="meta">Leinwand: 120 x 80 cm</p>
+                <p class="sold">VERKAUFT</p>
+              </div>
+            </article>
 
-<h3>Zähmung des Lichts</h3>
-<p class="info">Medium: Acryl, Strukturpaste, Blattgold</p>
-<p class="info">Leinwand: 140x100 cm</p>
+            <article class="art">
+              <div class="art-visual">
+                <img
+                  src="bilder/Diva Toscana.jpg"
+                  alt="Diva Toscana"
+                  onclick="openSold('diva_toscana')"
+                />
+              </div>
+              <div class="art-body">
+                <h3>Diva Toscana</h3>
+                <p class="meta">Medium: Acryl, Strukturpaste, Blattgold</p>
+                <p class="meta">Leinwand: 120 x 80 cm</p>
+                <p class="sold">VERKAUFT</p>
+              </div>
+            </article>
 
-<p class="sold">VERKAUFT</p>
+            <article class="art">
+              <div class="art-visual">
+                <img
+                  src="bilder/In der Ruhe liegt die Kraft.jpg"
+                  alt="In der Ruhe liegt die Kraft"
+                  onclick="openSold('ruhe_kraft')"
+                />
+              </div>
+              <div class="art-body">
+                <h3>In der Ruhe liegt die Kraft</h3>
+                <p class="meta">Medium: Acryl, Glas, Strukturpaste</p>
+                <p class="meta">Leinwand: 100 x 100 cm</p>
+                <p class="sold">VERKAUFT</p>
+              </div>
+            </article>
+          </div>
+        </section>
 
-</div>
+        <section id="about">
+          <div class="about-grid">
+            <div class="about-panel artist-quote">
+              <div>
+                <blockquote>
+                  "Ich schlief, als die Geister tanzten, dann tanzte ich mit
+                  meinen Geistern mit."
+                </blockquote>
+                <span>Petrovic Denis</span>
+              </div>
+            </div>
 
-<div class="art">
+            <div class="about-panel about-copy">
+              <h2>Über den Kuenstler</h2>
+              <p>
+                Petrovic Denis ist ein autodidaktischer Künstler, der durch
+                einen glücklichen Zufall zur Malerei fand. Im November 2023,
+                inspiriert durch seinen Sohn, begann er erstmals mit Farbe und
+                Leinwand zu experimentieren.
+              </p>
+              <p>
+                Aus diesem spontanen Anfang entwickelte sich rasch eine tiefe
+                Leidenschaft. Heute arbeitet er bevorzugt mit Acrylfarben,
+                Blattgold und Strukturpaste, um starke, materialreiche Werke mit
+                prägnanten Kontrasten zu schaffen.
+              </p>
+            </div>
+          </div>
+        </section>
 
-<img src="bilder/zwischen_genuss_und_leidenschaft.jpg"
-onclick="openSold('zwischen_genuss_und_leidenschaft')">
+        <section id="kontakt">
+          <div class="contact-grid">
+            <div class="contact-card contact-copy">
+              <h2>Kontakt</h2>
+              <p>
+                Wenn dich ein Werk anspricht oder du mehr erfahren möchtest,
+                freue ich mich über eine Nachricht.
+              </p>
+              <div class="contact-actions">
+                <a
+                  class="button button-primary"
+                  href="mailto:denispetro2@hotmail.com"
+                >
+                  E-Mail senden
+                </a>
 
-<h3>Zwischen Genuss und Leidenschaft</h3>
-<p class="info">Medium: Acryl, Strukturpaste, Blattgold</p>
-<p class="info">Leinwand: 120x80 cm</p>
+                <a
+                  class="button button-secondary"
+                  href="https://www.instagram.com/agugulu_art/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Instagram besuchen
+                </a>
+              </div>
+            </div>
 
-<p class="sold">VERKAUFT</p>
+            <div class="contact-card contact-copy">
+              <h2>Direkte Daten</h2>
+              <p>E-Mail: denispetro2@hotmail.com</p>
+              <p>
+                Instagram:
+                <a
+                  href="https://www.instagram.com/agugulu_art/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  @agugulu_art
+                </a>
+              </p>
+              <p>
+                Auch Anfragen zu Ausstellungen oder Kooperationen sind
+                willkommen.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
 
-</div>
-<div class="art">
+      <footer class="footer">AGUGULU ART by Petrovic Denis</footer>
+    </div>
 
-<img src="bilder/Diva Toscana.jpg"
-onclick="openSold('diva_toscana')">
-
-<h3>Diva Toscana</h3>
-
-<p class="info">Medium: Acryl, Strukturpaste, Blattgold</p>
-<p class="info">Leinwand: 120x80 cm</p>
-
-<p class="sold">VERKAUFT</p>
-
-</div>
-<div class="art">
-
-<img src="bilder/In der Ruhe liegt die Kraft.jpg"
-onclick="openSold('ruhe_kraft')">
-
-<h3>In der Ruhe liegt die Kraft</h3>
-
-<p class="info">Medium: Acryl, Glas, Strukturpaste</p>
-<p class="info">Leinwand: 100x100 cm</p>
-
-<p class="sold">VERKAUFT</p>
-
-</div>
-</div>
-
-</section>
-    </section>
-
-    <!-- ABOUT -->
-
-    <section id="about">
-      <h2>Über den Künstler</h2>
-
-      <p>
-        „Ich schlief, als die Geister tanzten, dann tanzte ich mit meinen
-        Geistern mit.“
-      </p>
-
-      <p>
-        Petrovic Denis ist ein autodidaktischer Künstler, der durch einen
-        glücklichen Zufall zur Malerei fand. Im November 2023, inspiriert durch
-        seinen Sohn, wagte er das erste Mal kreativ zu experimentieren. Was als
-        spontaner Kauf von Farbe und Leinwand begann, entwickelte sich schnell
-        zu einer tiefen Leidenschaft für die Kunst.
-      </p>
-
-      <p>
-        Petrovic Denis arbeitet bevorzugt mit Acrylfarben, Blattgold und
-        Strukturpaste, um eindrucksvolle Werke zu schaffen.
-      </p>
-    </section>
-
-    <!-- KONTAKT -->
-
-    <section id="kontakt">
-      <h2>Kontakt</h2>
-
-      <p>Email: denispetro2@hotmail.com</p>
-
-      <p>
-        <a href="https://www.instagram.com/agugulu_art/" target="_blank">
-          Instagram: @agugulu_art
-        </a>
-      </p>
-    </section>
-
-     <!-- Anfrage Popup -->
-    <form action="mailto:denispetro2@hotmail.com" method="post" enctype="text/plain">
-
-<h3>Kunstwerk Anfrage</h3>
-
-<input type="hidden" id="artworkName" name="Kunstwerk">
-
-<input type="text" name="Name" placeholder="Name" required><br><br>
-
-<input type="email" name="Email" placeholder="E-Mail" required><br><br>
-
-<textarea name="Nachricht" placeholder="Ihre Nachricht..." required></textarea><br><br>
-
-<button type="submit">Anfrage senden</button>
-
-</form>
-
-    <div class="popup" id="popup">
+    <div class="popup" id="formPopup" aria-hidden="true">
       <div class="popup-content">
-        <h3>Kunstwerk Anfrage</h3>
+        <button
+          class="popup-close"
+          type="button"
+          aria-label="Fenster schliessen"
+          onclick="closePopup('formPopup')"
+        >
+          X
+        </button>
 
-        <input type="text" placeholder="Name" /><br /><br />
-        <input type="email" placeholder="E-Mail" /><br /><br />
-        <textarea placeholder="Nachricht"></textarea><br /><br />
+        <h2>Kunstwerk anfragen</h2>
+        <p class="form-note">
+          Das Formular oeffnet dein E-Mail-Programm mit den eingegebenen Daten.
+        </p>
 
-        <button>Anfrage senden</button>
+        <form
+          action="mailto:denispetro2@hotmail.com"
+          method="post"
+          enctype="text/plain"
+          class="form-grid"
+        >
+          <label>
+            Kunstwerk
+            <input type="text" id="artworkName" name="Kunstwerk" readonly />
+          </label>
+
+          <label>
+            Name
+            <input type="text" name="Name" required />
+          </label>
+
+          <label>
+            E-Mail
+            <input type="email" name="Email" required />
+          </label>
+
+          <label>
+            Nachricht
+            <textarea
+              name="Nachricht"
+              required
+              placeholder="Ich interessiere mich fuer dieses Werk..."
+            ></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit">Anfrage senden</button>
+            <button
+              class="ghost"
+              type="button"
+              onclick="closePopup('formPopup')"
+            >
+              Abbrechen
+            </button>
+          </div>
+        </form>
       </div>
     </div>
 
-    <!-- SOLD GALERIE -->
-
-    <div class="popup" id="soldViewer">
-      <div class="popup-content">
-        <img id="soldBigImage" src="bilder/sold_main.jpg"/>
-
-     <div class="thumbs" id="soldThumbs"></div>
-
-        <button class="backBtn" onclick="closeSold()">Zurück</button>
+    <div class="popup" id="artViewer" aria-hidden="true">
+      <div class="popup-content viewer">
+        <button
+          class="popup-close"
+          type="button"
+          aria-label="Fenster schliessen"
+          onclick="closePopup('artViewer')"
+        >
+          X
+        </button>
+        <img
+          class="viewer-image"
+          id="artImage"
+          alt="Grossansicht des Kunstwerks"
+        />
       </div>
-      
     </div>
-   
-    
-    
-  
 
-    <!-- ORIGINAL BILD POPUP -->
-
-    <div class="popup" id="artViewer">
-      <div class="popup-content">
-        <img id="artImage" style="max-width: 90%" />
-
-        <button class="backBtn" onclick="closeArt()">Zurück</button>
+    <div class="popup" id="soldViewer" aria-hidden="true">
+      <div class="popup-content viewer">
+        <button
+          class="popup-close"
+          type="button"
+          aria-label="Fenster schliessen"
+          onclick="closePopup('soldViewer')"
+        >
+          X
+        </button>
+        <img
+          class="viewer-image"
+          id="soldBigImage"
+          alt="Grossansicht verkauftes Werk"
+        />
+        <div class="thumbs" id="soldThumbs"></div>
       </div>
     </div>
 
     <script>
-      function toggleMenu(){
+      const soldCollections = {
+        zaehmung_des_lichts: [
+          "bilder/sold_main.jpg",
+          "bilder/sold1.jpg",
+          "bilder/sold2.jpg",
+          "bilder/sold3.jpg",
+          "bilder/sold4.jpg",
+          "bilder/sold5.jpg",
+          "bilder/sold6.jpg",
+          "bilder/sold7.jpg",
+          "bilder/sold8.jpg",
+        ],
+        zwischen_genuss_und_leidenschaft: [
+          "bilder/zwischen_genuss_und_leidenschaft.jpg",
+          "bilder/zwischen_genuss_und_leidenschaft1.jpg",
+          "bilder/zwischen_genuss_und_leidenschaft2.jpg",
+          "bilder/zwischen_genuss_und_leidenschaft3.jpg",
+          "bilder/zwischen_genuss_und_leidenschaft4.jpg",
+          "bilder/zwischen_genuss_und_leidenschaft5.jpg",
+          "bilder/zwischen_genuss_und_leidenschaft6.jpg",
+        ],
+        diva_toscana: [
+          "bilder/Diva Toscana.jpg",
+          "bilder/diva1.jpg",
+          "bilder/diva2.jpg",
+          "bilder/diva3.jpg",
+          "bilder/diva4.jpg",
+        ],
+        ruhe_kraft: [
+          "bilder/In der Ruhe liegt die Kraft.jpg",
+          "bilder/ruhe1.jpg",
+          "bilder/ruhe2.jpg",
+          "bilder/ruhe3.jpg",
+          "bilder/ruhe4.jpg",
+        ],
+      };
 
-let menu=document.getElementById("menu");
+      function toggleMenu() {
+        const menu = document.getElementById("menu");
+        const toggle = document.querySelector(".menu-toggle");
+        const isActive = menu.classList.toggle("active");
+        toggle.setAttribute("aria-expanded", String(isActive));
+      }
 
-menu.classList.toggle("active");
+      function openPopup(id) {
+        const popup = document.getElementById(id);
+        popup.classList.add("is-open");
+        popup.setAttribute("aria-hidden", "false");
+      }
 
-}
-      function openSold(work){
-
-document.getElementById("soldViewer").style.display = "flex";
-
-let images = [];
-
-if(work === "zaehmung_des_lichts"){
-
-images = [
-"bilder/sold_main.jpg",
-"bilder/sold1.jpg",
-"bilder/sold2.jpg",
-"bilder/sold3.jpg"
-];
-
-}
-
-if(work === "zwischen_genuss_und_leidenschaft"){
-
-images = [
-"bilder/zwischen_genuss_und_leidenschaft.jpg",
-"bilder/zwischen_genuss_und_leidenschaft1.jpg",
-"bilder/zwischen_genuss_und_leidenschaft2.jpg",
-"bilder/zwischen_genuss_und_leidenschaft3.jpg"
-];
-
-}
-if(work === "diva_toscana"){
-images = [
-"bilder/Diva Toscana.jpg",
-"bilder/diva1.jpg",
-"bilder/diva2.jpg",
-"bilder/diva3.jpg",
-"bilder/diva4.jpg",
-];
-}
-
-if(work === "ruhe_kraft"){
-images = [
-"bilder/In der Ruhe liegt die Kraft.jpg",
-"bilder/ruhe1.jpg",
-"bilder/ruhe2.jpg",
-"bilder/ruhe3.jpg",
-"bilder/ruhe4.jpg",
-];
-}
-
-document.getElementById("soldBigImage").src = images[0];
-
-let thumbs = document.getElementById("soldThumbs");
-thumbs.innerHTML = "";
-
-images.forEach(function(img){
-
-let image = document.createElement("img");
-image.src = img;
-
-image.onclick = function(){
-document.getElementById("soldBigImage").src = img;
-};
-
-thumbs.appendChild(image);
-
-});
-
-}
-   
-      
-      /* Original Werke */
+      function closePopup(id) {
+        const popup = document.getElementById(id);
+        popup.classList.remove("is-open");
+        popup.setAttribute("aria-hidden", "true");
+      }
 
       function openArt(img) {
-        document.getElementById("artViewer").style.display = "flex";
-        document.getElementById("artImage").src = img.src;
+        const artImage = document.getElementById("artImage");
+        artImage.src = img.src;
+        artImage.alt = img.alt;
+        openPopup("artViewer");
       }
 
-      function closeArt() {
-        document.getElementById("artViewer").style.display = "none";
+      function openForm(artwork) {
+        document.getElementById("artworkName").value = artwork || "";
+        openPopup("formPopup");
       }
 
-      /* Anfrage */
-      function openForm(artwork){
-document.getElementById("popup").style.display="flex";
-document.getElementById("artworkName").value = artwork;
+      function renderThumbs(images) {
+        const thumbs = document.getElementById("soldThumbs");
+        const bigImage = document.getElementById("soldBigImage");
 
-}
+        thumbs.innerHTML = "";
 
-      function openForm() {
-        document.getElementById("popup").style.display = "flex";
+        images.forEach(function (src, index) {
+          const thumb = document.createElement("img");
+          thumb.src = src;
+          thumb.alt = "Detailansicht " + (index + 1);
+
+          if (index === 0) {
+            thumb.classList.add("active");
+          }
+
+          thumb.addEventListener("click", function () {
+            bigImage.src = src;
+
+            document
+              .querySelectorAll("#soldThumbs img")
+              .forEach(function (item) {
+                item.classList.remove("active");
+              });
+
+            thumb.classList.add("active");
+          });
+
+          thumbs.appendChild(thumb);
+        });
       }
 
-      function closeForm() {
-        document.getElementById("popup").style.display = "none";
+      function openSold(work) {
+        const images = soldCollections[work] || [];
+        const bigImage = document.getElementById("soldBigImage");
+
+        if (!images.length) {
+          return;
+        }
+
+        bigImage.src = images[0];
+        renderThumbs(images);
+        openPopup("soldViewer");
       }
 
-      /* Sold Galerie */
-      
-      function closeSold() {
-        document.getElementById("soldViewer").style.display = "none";
-      }
+      document.querySelectorAll(".popup").forEach(function (popup) {
+        popup.addEventListener("click", function (event) {
+          if (event.target === popup) {
+            closePopup(popup.id);
+          }
+        });
+      });
 
-      function changeSold(img) {
-        document.getElementById("soldBigImage").src = img.src;
-      }
+      document.querySelectorAll('nav a[href^="#"]').forEach(function (link) {
+        link.addEventListener("click", function () {
+          const menu = document.getElementById("menu");
+          const toggle = document.querySelector(".menu-toggle");
+
+          menu.classList.remove("active");
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          document.querySelectorAll(".popup.is-open").forEach(function (popup) {
+            closePopup(popup.id);
+          });
+        }
+      });
     </script>
   </body>
 </html>
