@@ -3,62 +3,295 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Ornamenturm II</title>
+    <meta
+      name="description"
+      content="Ornamentum II von Petrovic Denis. Detailseite mit Werkansicht, Informationen und Nahaufnahmen."
+    />
+    <title>Ornamentum II | AGUGULU ART</title>
 
     <style>
-      body {
-        font-family: Arial;
-        margin: 0;
-        background: white;
-        text-align: center;
+      :root {
+        --bg: #f6f3ee;
+        --surface: #ffffff;
+        --ink: #181716;
+        --muted: #66615a;
+        --line: rgba(24, 23, 22, 0.12);
+        --accent: #181716;
+        --shadow: 0 18px 40px rgba(24, 23, 22, 0.06);
       }
 
-      /* HERO IMAGE */
+      * {
+        box-sizing: border-box;
+      }
 
-      .hero img {
-        width: 50%;
-        max-height: 90vh;
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 28px 0 56px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 0 0 22px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        font-size: 1.15rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .back-link {
+        display: inline-block;
+        text-decoration: none;
+        color: var(--muted);
+      }
+
+      .back-link:hover,
+      .back-link:focus-visible {
+        color: var(--ink);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 32px;
+        padding: 42px 0 28px;
+      }
+
+      .hero-image {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        padding: 20px;
+      }
+
+      .hero-image img {
+        width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+      }
+
+      .hero-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 18px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--muted);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 5vw, 4.4rem);
+        line-height: 0.96;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .lead {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+        font-size: 1rem;
+      }
+
+      .specs {
+        display: grid;
+        gap: 10px;
+        padding: 22px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+
+      .specs p {
+        margin: 0;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 13px 20px;
+        text-decoration: none;
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 24px;
+        padding: 32px 0 20px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 500;
+      }
+
+      .section-head p {
+        max-width: 520px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .detail-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+
+      .detail-card img {
+        width: 100%;
+        aspect-ratio: 4 / 5;
         object-fit: cover;
       }
 
-      /* SCROLL DETAILS */
-
-      .detail {
-        padding: 100px 10%;
+      .detail-card p {
+        margin: 14px 0 0;
+        color: var(--muted);
       }
 
-      .detail img {
-        width: 60%;
-        max-width: 500px;
-        margin: 80px auto;
-        display: block;
+      @media (max-width: 860px) {
+        .hero,
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
-      .back {
-        margin-top: 40px;
-        display: inline-block;
-        padding: 10px 20px;
-        background: black;
-        color: white;
-        text-decoration: none;
+      @media (max-width: 760px) {
+        .page {
+          width: min(100%, calc(100% - 24px));
+          padding-top: 20px;
+        }
+
+        .topbar {
+          flex-direction: column;
+          align-items: start;
+        }
+
+        .actions {
+          flex-direction: column;
+        }
+
+        .button {
+          width: 100%;
+          text-align: center;
+        }
+
+        .hero-image {
+          padding: 14px;
+        }
       }
     </style>
   </head>
 
   <body>
-    <div class="hero">
-      <img src="bilder/ornamentum2.jpg" />
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">AGUGULU ART</div>
+        <a class="back-link" href="index.html">Zurück zur Hauptseite</a>
+      </header>
+
+      <section class="hero">
+        <div class="hero-image">
+          <img src="bilder/ornamentum2.jpg" alt="Ornamentum II" />
+        </div>
+
+        <div class="hero-copy">
+          <p class="eyebrow">Werkansicht</p>
+          <h1>Ornamentum II</h1>
+          <p class="lead">
+            Ein großformatiges Acrylwerk mit ornamentaler Bewegung, dichter
+            Oberfläche und klarer Präsenz. Diese Detailseite zeigt das Werk in
+            der Gesamtansicht und in zwei Nahaufnahmen.
+          </p>
+
+          <div class="specs">
+            <p><strong>Medium:</strong> Acryl</p>
+            <p><strong>Leinwand:</strong> 100 x 100 cm</p>
+            <p><strong>Preis:</strong> 1600 EUR</p>
+          </div>
+
+          <div class="actions">
+            <a class="button" href="mailto:denispetro2@hotmail.com?subject=Anfrage%20Ornamentum%20II">
+              Kunstwerk anfragen
+            </a>
+            <a class="button secondary" href="index.html#originale">
+              Zur Galerie
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Details</h2>
+          <p>
+            Nahaufnahmen zeigen Struktur, Materialität und die feinen
+            Oberflächen des Werks.
+          </p>
+        </div>
+
+        <div class="details-grid">
+          <article class="detail-card">
+            <img src="bilder/detail1.jpg" alt="Detailansicht von Ornamentum II" />
+            <p>Detailansicht I</p>
+          </article>
+
+          <article class="detail-card">
+            <img src="bilder/detail2.jpg" alt="Weitere Detailansicht von Ornamentum II" />
+            <p>Detailansicht II</p>
+          </article>
+        </div>
+      </section>
     </div>
-
-    <section class="detail">
-      <h2>Ornamenturm II – Details</h2>
-
-      <img src="bilder/detail1.jpg" />
-
-      <img src="bilder/detail2.jpg" />
-
-      <a class="back" href="index.html">← Zurück</a>
-    </section>
   </body>
 </html>
