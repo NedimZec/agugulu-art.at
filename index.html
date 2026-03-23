@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -631,6 +631,7 @@
         .hero {
           min-height: 62vh;
           align-items: center;
+          padding-top: 42px;
         }
 
         .hero::after {
@@ -725,7 +726,7 @@
         <aside class="note-card">
           <h2>Jedes Werk hat seine eigene Spannung</h2>
           <p>
-            Mit einem Klick auf ein Werk öffnet sich die Grossansicht. Für
+            Mit einem Klick auf ein Werk öffnet sich die Großansicht. Für
             verfügbare Bilder kann direkt eine Anfrage mit vorausgefülltem
             Titel gestartet werden.
           </p>
@@ -738,7 +739,7 @@
             <h2>Originale Werke</h2>
             <p>
               Alle hier gezeigten Werke sind aktuell verfügbar. Ein Klick auf
-              das Bild zeigt dir das Werk grösser.
+              das Bild zeigt dir das Werk größer.
             </p>
           </div>
 
@@ -764,11 +765,12 @@
 
             <article class="art">
               <div class="art-visual">
-                <img
-                  src="bilder/ornamentum2.jpg"
-                  alt="Ornamentum II"
-                  onclick="openArt(this)"
-                />
+                <a href="art2.html" aria-label="Ornamentum II Detailseite öffnen">
+                  <img
+                    src="bilder/ornamentum2.jpg"
+                    alt="Ornamentum II"
+                  />
+                </a>
               </div>
               <div class="art-body">
                 <h3>Ornamentum II</h3>
@@ -780,6 +782,32 @@
                 </button>
               </div>
             </article>
+
+            <!--
+              Vorlage für neues verkaufbares Werk:
+              1. Bild in den Ordner "bilder" legen
+              2. Diesen Block kopieren
+              3. Dateiname, Titel, Medium, Größe und Preis anpassen
+
+              <article class="art">
+                <div class="art-visual">
+                  <img
+                    src="bilder/dein-bild.jpg"
+                    alt="Titel des Werks"
+                    onclick="openArt(this)"
+                  />
+                </div>
+                <div class="art-body">
+                  <h3>Titel des Werks</h3>
+                  <p class="meta">Medium: Acryl</p>
+                  <p class="meta">Leinwand: 100 x 100 cm</p>
+                  <p class="price">1200 EUR</p>
+                  <button type="button" onclick="openForm('Titel des Werks')">
+                    Kunstwerk anfragen
+                  </button>
+                </div>
+              </article>
+            -->
           </div>
         </section>
 
@@ -797,7 +825,7 @@
               <div class="art-visual">
                 <img
                   src="bilder/sold_main.jpg"
-                  alt="Zaehmung des Lichts"
+                  alt="Zähmung des Lichts"
                   onclick="openSold('zaehmung_des_lichts')"
                 />
               </div>
@@ -872,7 +900,7 @@
             </div>
 
             <div class="about-panel about-copy">
-              <h2>Über den Kuenstler</h2>
+              <h2>Über den Künstler</h2>
               <p>
                 Petrovic Denis ist ein autodidaktischer Künstler, der durch
                 einen glücklichen Zufall zur Malerei fand. Im November 2023,
@@ -946,7 +974,7 @@
         <button
           class="popup-close"
           type="button"
-          aria-label="Fenster schliessen"
+          aria-label="Fenster schließen"
           onclick="closePopup('formPopup')"
         >
           X
@@ -983,7 +1011,7 @@
             <textarea
               name="Nachricht"
               required
-              placeholder="Ich interessiere mich fuer dieses Werk..."
+              placeholder="Ich interessiere mich für dieses Werk..."
             ></textarea>
           </label>
 
@@ -1006,7 +1034,7 @@
         <button
           class="popup-close"
           type="button"
-          aria-label="Fenster schliessen"
+          aria-label="Fenster schließen"
           onclick="closePopup('artViewer')"
         >
           X
@@ -1014,7 +1042,7 @@
         <img
           class="viewer-image"
           id="artImage"
-          alt="Grossansicht des Kunstwerks"
+          alt="Großansicht des Kunstwerks"
         />
       </div>
     </div>
@@ -1024,7 +1052,7 @@
         <button
           class="popup-close"
           type="button"
-          aria-label="Fenster schliessen"
+          aria-label="Fenster schließen"
           onclick="closePopup('soldViewer')"
         >
           X
@@ -1032,7 +1060,7 @@
         <img
           class="viewer-image"
           id="soldBigImage"
-          alt="Grossansicht verkauftes Werk"
+          alt="Großansicht verkauftes Werk"
         />
         <div class="thumbs" id="soldThumbs"></div>
       </div>
