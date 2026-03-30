@@ -356,14 +356,31 @@
         font-weight: 500;
       }
 
+      .art-subtitle {
+        margin: 0 0 12px;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .art-description {
+        margin: 0 0 14px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
       .meta {
         margin: 0 0 8px;
-        color: var(--muted);
+        color: var(--accent-dark);
+      }
+
+      .meta strong {
+        font-weight: 700;
       }
 
       .price {
-        margin: 10px 0 18px;
-        font-size: 1.2rem;
+        margin: 14px 0 18px;
+        font-size: 1.34rem;
+        font-weight: 700;
         letter-spacing: 0.04em;
         color: var(--accent-dark);
       }
@@ -564,7 +581,6 @@
 
       @media (max-width: 920px) {
         .intro-grid,
-        .about-grid,
         .contact-grid {
           grid-template-columns: 1fr;
         }
@@ -576,6 +592,11 @@
 
         .facts {
           grid-template-columns: 1fr;
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
         }
       }
 
@@ -597,6 +618,18 @@
         .intro-grid {
           margin-top: 0;
           padding: 20px;
+        }
+
+        .about-section {
+          padding: 80px 24px;
+        }
+
+        .about-text {
+          gap: 22px;
+        }
+
+        .about-panel {
+          padding: 24px;
         }
 
         .menu-toggle {
@@ -684,7 +717,7 @@
       <section class="hero" id="start">
         <div class="hero-content">
           <p class="hero-kicker">Acryl, Struktur, Blattgold</p>
-          <h1>Abstrakte Kunst von Petrovic Denis.</h1>
+          <h1>Zeitgenössische Kunst von Petrovic Denis.</h1>
           <p>
             Farbe, Form und Struktur. Ausgewählte Originale und verkaufte
             Arbeiten von AGUGULU ART direkt aus dem Atelier.
@@ -746,19 +779,39 @@
           <div class="gallery">
             <article class="art">
               <div class="art-visual">
-                <img
-                  src="bilder/ornamentum1.jpg"
-                  alt="Ornamentum I"
-                  onclick="openArt(this)"
-                />
+                <a
+                  href="art1.html"
+                  aria-label="Ornumenta Der innere Blick Detailseite öffnen"
+                >
+                  <img
+                    src="bilder/ornamentum1.jpg"
+                    alt="Ornumenta Der innere Blick"
+                  />
+                </a>
               </div>
               <div class="art-body">
-                <h3>Ornamentum I</h3>
-                <p class="meta">Medium: Acryl</p>
-                <p class="meta">Leinwand: 100 x 100 cm</p>
-                <p class="price">4200 EUR</p>
-                <button type="button" onclick="openForm('Ornamentum I')">
-                  Kunstwerk anfragen
+                <h3>Ornumenta &ndash; Der innere Blick</h3>
+                <p class="art-description">
+                  Ein fesselndes Psychogramm, das den Blick in die Tiefen des
+                  menschlichen Bewusstseins zeigt. Vielschichtig und voller
+                  intensiver Emotionen eröffnet das Werk eine geheimnisvolle
+                  Welt aus Farben, Formen und goldenen Elementen.
+                </p>
+                <p class="meta"><strong>Technik:</strong> Acryl auf Leinwand</p>
+                <p class="meta"><strong>Format:</strong> 100 x 100 cm</p>
+                <p class="meta"><strong>Serie:</strong> Ornamentum</p>
+                <p class="meta"><strong>Status:</strong> Original / Unikat</p>
+                <p class="meta">
+                  <strong>Extras:</strong> Gerahmt, signiert, inkl.
+                  Echtheitszertifikat
+                </p>
+                <p class="meta"><strong>Jahr:</strong> 2024</p>
+                <p class="price">4.200 EUR</p>
+                <button
+                  type="button"
+                  onclick="openForm('Ornumenta - Der innere Blick')"
+                >
+                  Originalwerk anfragen
                 </button>
               </div>
             </article>
@@ -767,18 +820,35 @@
               <div class="art-visual">
                 <a
                   href="art2.html"
-                  aria-label="Ornamentum II Detailseite öffnen"
+                  aria-label="Ornamentum II Supernova Detailseite öffnen"
                 >
-                  <img src="bilder/ornamentum2.jpg" alt="Ornamentum II" />
+                  <img src="bilder/ornamentum2.jpg" alt="Ornamentum II Supernova" />
                 </a>
               </div>
               <div class="art-body">
-                <h3>Ornamentum II</h3>
-                <p class="meta">Medium: Acryl</p>
-                <p class="meta">Leinwand: 100 x 100 cm</p>
-                <p class="price">2100 EUR</p>
-                <button type="button" onclick="openForm('Ornamentum II')">
-                  Kunstwerk anfragen
+                <h3>Ornamentum II (Supernova)</h3>
+                <p class="art-subtitle">Vom Weltall inspiriert</p>
+                <p class="art-description">
+                  Ein aus dem Kosmos inspiriertes Porträt voller Energie,
+                  Ornamentik und leuchtender Symbolik. Goldene Linien, florale
+                  Elemente und die dunkle Tiefe des Hintergrunds verleihen dem
+                  Werk eine geheimnisvolle, fast magnetische Präsenz.
+                </p>
+                <p class="meta"><strong>Technik:</strong> Acryl auf Leinwand</p>
+                <p class="meta"><strong>Format:</strong> 100 x 100 cm</p>
+                <p class="meta"><strong>Serie:</strong> Ornamentum</p>
+                <p class="meta"><strong>Status:</strong> Original / Unikat</p>
+                <p class="meta">
+                  <strong>Extras:</strong> Gerahmt, signiert, inkl.
+                  Echtheitszertifikat
+                </p>
+                <p class="meta"><strong>Jahr:</strong> 2025</p>
+                <p class="price">2.100 EUR</p>
+                <button
+                  type="button"
+                  onclick="openForm('Ornamentum II (Supernova)')"
+                >
+                  Originalwerk anfragen
                 </button>
               </div>
             </article>
@@ -910,8 +980,8 @@
               <p>
                 Aus diesem spontanen Anfang entwickelte sich rasch eine tiefe
                 Leidenschaft. Heute arbeitet er bevorzugt mit Acrylfarben,
-                Blattgold und Strukturpaste, um starke, materialreiche Werke mit
-                prägnanten Kontrasten zu schaffen.
+                Blattgold und Strukturpaste, um starke, materialreiche Werke
+                mit prägnanten Kontrasten zu schaffen.
               </p>
             </div>
           </div>
