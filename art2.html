@@ -77,19 +77,115 @@
         grid-template-columns: 1.1fr 0.9fr;
         gap: 32px;
         padding: 42px 0 28px;
+        align-items: start;
       }
 
       .hero-image {
-        background: var(--surface);
+        position: relative;
+        background: linear-gradient(145deg, #f6efe4, #f2e8da);
         border: 1px solid var(--line);
         box-shadow: var(--shadow);
-        padding: 20px;
+        padding: 8px;
+        align-self: start;
       }
 
       .hero-image img {
         width: 100%;
-        max-height: 80vh;
-        object-fit: contain;
+        aspect-ratio: 1 / 1;
+        max-height: min(78vh, 760px);
+        object-fit: cover;
+        object-position: center center;
+        border: 1px solid rgba(24, 23, 22, 0.14);
+        cursor: zoom-in;
+      }
+
+      .zoom-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        padding: 20px;
+        background: rgba(20, 13, 8, 0.84);
+        align-items: center;
+        justify-content: center;
+      }
+
+      .zoom-modal.is-open {
+        display: flex;
+      }
+
+      .zoom-panel {
+        width: min(96vw, 1280px);
+        max-height: 92vh;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+
+      .zoom-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .zoom-controls {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .zoom-controls .close-zoom {
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .zoom-controls .zoom-level {
+        min-width: 56px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .zoom-hint {
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .zoom-stage {
+        overflow: auto;
+        background: #f0ece6;
+        padding: 14px;
+        overscroll-behavior: contain;
+      }
+
+      .zoom-stage.can-pan {
+        cursor: grab;
+        touch-action: none;
+      }
+
+      .zoom-stage.can-pan img {
+        pointer-events: none;
+      }
+
+      .zoom-stage.is-dragging {
+        cursor: grabbing;
+      }
+
+      .zoom-stage img {
+        width: 100%;
+        max-width: none;
+        height: auto;
       }
 
       .hero-copy {
@@ -112,7 +208,6 @@
         font-size: clamp(2.4rem, 5vw, 4.4rem);
         line-height: 0.96;
         letter-spacing: 0.03em;
-        text-transform: uppercase;
       }
 
       .lead {
@@ -229,6 +324,10 @@
         .hero-image {
           padding: 14px;
         }
+
+        .zoom-hint {
+          display: none;
+        }
       }
     </style>
   </head>
@@ -298,5 +397,286 @@
         </div>
       </section>
     </div>
+
+    <div class="zoom-modal" id="zoomModal" aria-hidden="true">
+      <div class="zoom-panel" role="dialog" aria-modal="true" aria-label="Bildvergroesserung Ornamentum II">
+        <div class="zoom-toolbar">
+          <strong>Ornamentum II &ndash; Zoom</strong>
+          <div class="zoom-controls">
+            <span class="zoom-level" id="zoomLevel">100%</span>
+            <span class="zoom-hint">Mausrad/Pinch zoomen, ziehen zum Scrollen</span>
+            <button class="close-zoom" type="button" onclick="closeZoomModal()" aria-label="Zoom schliessen">X</button>
+          </div>
+        </div>
+        <div class="zoom-stage">
+          <img id="zoomImage" src="bilder/ornamentum2.jpg" alt="Ornamentum II Supernova vergroessert" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentZoom = 1;
+      let isDragging = false;
+      let dragStartX = 0;
+      let dragStartY = 0;
+      let startScrollLeft = 0;
+      let startScrollTop = 0;
+      let pinchStartDistance = 0;
+      let pinchStartZoom = 1;
+      let lastTapTime = 0;
+      let lastTapX = 0;
+      let lastTapY = 0;
+      const activeTouchPoints = new Map();
+
+      const zoomModal = document.getElementById("zoomModal");
+      const zoomStage = document.querySelector(".zoom-stage");
+      const zoomImage = document.getElementById("zoomImage");
+      const zoomLevel = document.getElementById("zoomLevel");
+      const heroImage = document.querySelector(".hero-image img");
+
+      function clampZoom(value) {
+        return Math.max(1, Math.min(3, value));
+      }
+
+      function updateZoomUI() {
+        zoomImage.style.width = Math.round(currentZoom * 100) + "%";
+        zoomLevel.textContent = Math.round(currentZoom * 100) + "%";
+        if (currentZoom > 1) {
+          zoomStage.classList.add("can-pan");
+        } else {
+          zoomStage.classList.remove("can-pan");
+          zoomStage.classList.remove("is-dragging");
+        }
+      }
+
+      function applyZoom(nextZoom, originX, originY) {
+        const previousZoom = currentZoom;
+        currentZoom = clampZoom(nextZoom);
+
+        if (originX !== undefined && originY !== undefined && previousZoom !== currentZoom) {
+          const rect = zoomStage.getBoundingClientRect();
+          const stageX = originX - rect.left;
+          const stageY = originY - rect.top;
+          const absoluteX = stageX + zoomStage.scrollLeft;
+          const absoluteY = stageY + zoomStage.scrollTop;
+          const ratio = currentZoom / previousZoom;
+
+          updateZoomUI();
+
+          zoomStage.scrollLeft = absoluteX * ratio - stageX;
+          zoomStage.scrollTop = absoluteY * ratio - stageY;
+          return;
+        }
+
+        updateZoomUI();
+      }
+
+      function getTouchDistance() {
+        if (activeTouchPoints.size < 2) {
+          return 0;
+        }
+        const points = Array.from(activeTouchPoints.values());
+        const dx = points[0].x - points[1].x;
+        const dy = points[0].y - points[1].y;
+        return Math.hypot(dx, dy);
+      }
+
+      function getTouchMidpoint() {
+        const points = Array.from(activeTouchPoints.values());
+        return {
+          x: (points[0].x + points[1].x) / 2,
+          y: (points[0].y + points[1].y) / 2,
+        };
+      }
+
+      function centerZoomView() {
+        const maxLeft = zoomStage.scrollWidth - zoomStage.clientWidth;
+        const maxTop = zoomStage.scrollHeight - zoomStage.clientHeight;
+        zoomStage.scrollLeft = Math.max(0, maxLeft / 2);
+        zoomStage.scrollTop = Math.max(0, maxTop / 2);
+      }
+
+      function openZoomModal() {
+        stopDragging();
+        activeTouchPoints.clear();
+        pinchStartDistance = 0;
+        pinchStartZoom = 1;
+        currentZoom = 1;
+        updateZoomUI();
+        zoomStage.scrollLeft = 0;
+        zoomStage.scrollTop = 0;
+        zoomModal.classList.add("is-open");
+        zoomModal.setAttribute("aria-hidden", "false");
+        requestAnimationFrame(function () {
+          centerZoomView();
+        });
+      }
+
+      function closeZoomModal() {
+        stopDragging();
+        activeTouchPoints.clear();
+        pinchStartDistance = 0;
+        pinchStartZoom = 1;
+        zoomModal.classList.remove("is-open");
+        zoomModal.setAttribute("aria-hidden", "true");
+      }
+
+      function changeZoom(delta, originX, originY) {
+        applyZoom(currentZoom + delta, originX, originY);
+      }
+
+      function toggleQuickZoom(originX, originY) {
+        if (currentZoom > 1) {
+          applyZoom(1, originX, originY);
+        } else {
+          applyZoom(2, originX, originY);
+        }
+      }
+
+      zoomModal.addEventListener("click", function (event) {
+        if (event.target.id === "zoomModal") {
+          closeZoomModal();
+        }
+      });
+
+      zoomStage.addEventListener(
+        "wheel",
+        function (event) {
+          if (!zoomModal.classList.contains("is-open")) {
+            return;
+          }
+          event.preventDefault();
+          const delta = event.deltaY < 0 ? 0.12 : -0.12;
+          changeZoom(delta, event.clientX, event.clientY);
+        },
+        { passive: false }
+      );
+
+      zoomStage.addEventListener("dblclick", function (event) {
+        event.preventDefault();
+        toggleQuickZoom(event.clientX, event.clientY);
+      });
+
+      heroImage.addEventListener("click", function () {
+        openZoomModal();
+      });
+
+      zoomStage.addEventListener("pointerdown", function (event) {
+        if (event.pointerType === "touch") {
+          event.preventDefault();
+        }
+        if (event.pointerType === "touch") {
+          activeTouchPoints.set(event.pointerId, { x: event.clientX, y: event.clientY });
+          if (activeTouchPoints.size === 2) {
+            pinchStartDistance = getTouchDistance();
+            pinchStartZoom = currentZoom;
+            stopDragging();
+            return;
+          }
+        }
+
+        if (currentZoom <= 1) {
+          return;
+        }
+
+        isDragging = true;
+        dragStartX = event.clientX;
+        dragStartY = event.clientY;
+        startScrollLeft = zoomStage.scrollLeft;
+        startScrollTop = zoomStage.scrollTop;
+        zoomStage.classList.add("is-dragging");
+        try {
+          zoomStage.setPointerCapture(event.pointerId);
+        } catch (_error) {}
+      });
+
+      zoomStage.addEventListener("pointerleave", function (event) {
+        stopDragging(event.pointerId);
+      });
+
+      zoomStage.addEventListener("lostpointercapture", function () {
+        stopDragging();
+      });
+
+      zoomStage.addEventListener("pointermove", function (event) {
+        if (event.pointerType === "touch") {
+          event.preventDefault();
+        }
+        if (event.pointerType === "touch" && activeTouchPoints.has(event.pointerId)) {
+          activeTouchPoints.set(event.pointerId, { x: event.clientX, y: event.clientY });
+          if (activeTouchPoints.size === 2) {
+            const distance = getTouchDistance();
+            if (pinchStartDistance > 0) {
+              const midpoint = getTouchMidpoint();
+              const nextZoom = pinchStartZoom * (distance / pinchStartDistance);
+              applyZoom(nextZoom, midpoint.x, midpoint.y);
+            }
+            return;
+          }
+        }
+
+        if (!isDragging) {
+          return;
+        }
+
+        zoomStage.scrollLeft = startScrollLeft - (event.clientX - dragStartX);
+        zoomStage.scrollTop = startScrollTop - (event.clientY - dragStartY);
+      });
+
+      function stopDragging(pointerId) {
+        if (!isDragging) {
+          return;
+        }
+        isDragging = false;
+        zoomStage.classList.remove("is-dragging");
+        if (pointerId !== undefined) {
+          try {
+            zoomStage.releasePointerCapture(pointerId);
+          } catch (_error) {}
+        }
+      }
+
+      zoomStage.addEventListener("pointerup", function (event) {
+        if (event.pointerType === "touch") {
+          activeTouchPoints.delete(event.pointerId);
+          if (activeTouchPoints.size < 2) {
+            pinchStartDistance = 0;
+            pinchStartZoom = currentZoom;
+          }
+          if (activeTouchPoints.size === 0) {
+            const now = Date.now();
+            const isDoubleTap =
+              now - lastTapTime < 300 &&
+              Math.hypot(event.clientX - lastTapX, event.clientY - lastTapY) < 24;
+            if (isDoubleTap) {
+              toggleQuickZoom(event.clientX, event.clientY);
+              lastTapTime = 0;
+            } else {
+              lastTapTime = now;
+              lastTapX = event.clientX;
+              lastTapY = event.clientY;
+            }
+          }
+        }
+        stopDragging(event.pointerId);
+      });
+
+      zoomStage.addEventListener("pointercancel", function (event) {
+        if (event.pointerType === "touch") {
+          activeTouchPoints.delete(event.pointerId);
+          if (activeTouchPoints.size < 2) {
+            pinchStartDistance = 0;
+            pinchStartZoom = currentZoom;
+          }
+        }
+        stopDragging(event.pointerId);
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeZoomModal();
+        }
+      });
+    </script>
   </body>
 </html>

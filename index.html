@@ -20,7 +20,9 @@
         --accent: #181716;
         --accent-dark: #181716;
         --sold: #8a4635;
+        --gold: #b56a2c;
         --shadow: 0 18px 40px rgba(24, 23, 22, 0.06);
+        --shadow-card: 0 24px 56px rgba(24, 23, 22, 0.1);
       }
 
       * {
@@ -35,7 +37,10 @@
         margin: 0;
         font-family: "Avenir Next", "Segoe UI", sans-serif;
         color: var(--ink);
-        background: var(--bg);
+        background:
+          radial-gradient(circle at 0% 0%, rgba(192, 150, 88, 0.12), transparent 34%),
+          radial-gradient(circle at 100% 100%, rgba(140, 95, 58, 0.08), transparent 32%),
+          var(--bg);
       }
 
       img {
@@ -55,7 +60,7 @@
 
       .page-shell {
         width: min(1180px, calc(100% - 32px));
-        margin: 0 auto 40px;
+        margin: 0 auto 52px;
         background: transparent;
         overflow: hidden;
       }
@@ -69,8 +74,10 @@
         justify-content: space-between;
         gap: 24px;
         padding: 18px 32px;
-        background: rgba(246, 243, 238, 0.96);
+        background: rgba(246, 243, 238, 0.84);
         border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 8px 22px rgba(24, 23, 22, 0.06);
       }
 
       .logo-wrap {
@@ -109,6 +116,7 @@
       }
 
       nav a {
+        position: relative;
         text-decoration: none;
         color: var(--muted);
         font-size: 0.96rem;
@@ -116,53 +124,89 @@
         text-transform: uppercase;
       }
 
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -7px;
+        width: 100%;
+        height: 1px;
+        background: var(--accent-dark);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+
       nav a:hover,
       nav a:focus-visible {
         color: var(--accent-dark);
       }
 
+      nav a:hover::after,
+      nav a:focus-visible::after {
+        transform: scaleX(1);
+      }
+
       .hero {
         position: relative;
         min-height: 70vh;
-        padding: 110px 32px 52px;
+        padding: 112px 32px 58px;
         display: grid;
         align-items: end;
         background:
           linear-gradient(
             90deg,
-            rgba(18, 16, 14, 0.58) 0%,
-            rgba(18, 16, 14, 0.14) 62%,
+            rgba(18, 16, 14, 0.6) 0%,
+            rgba(18, 16, 14, 0.24) 46%,
             rgba(18, 16, 14, 0.04) 100%
           ),
+          linear-gradient(180deg, rgba(18, 16, 14, 0.05), rgba(18, 16, 14, 0.46)),
           url("bilder/ornamentum1.jpg") center 22% / cover no-repeat;
       }
 
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 20% 12%, rgba(255, 214, 169, 0.16), transparent 28%);
+        pointer-events: none;
+      }
+
       .hero::after {
-        display: none;
+        content: "";
+        position: absolute;
+        left: 32px;
+        right: 32px;
+        bottom: 0;
+        height: 1px;
+        background: rgba(255, 240, 220, 0.22);
       }
 
       .hero-content {
         position: relative;
         z-index: 1;
         max-width: 700px;
+        padding: 0;
         color: #f8f4ef;
         animation: fadeUp 0.9s ease both;
       }
 
       .hero-kicker {
         margin: 0 0 14px;
-        font-size: 0.84rem;
+        font-size: 0.8rem;
         letter-spacing: 0.24em;
         text-transform: uppercase;
+        color: rgba(255, 232, 205, 0.92);
       }
 
       .hero h1 {
-  margin: 0;
-  font-family: "Helvetica Neue", "Avenir Next", sans-serif;
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1.15;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+        margin: 0;
+        font-family: "Helvetica Neue", "Avenir Next", sans-serif;
+        font-size: clamp(1.8rem, 4.4vw, 3.3rem);
+        line-height: 1.1;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
       }
 
       .hero p {
@@ -170,7 +214,7 @@
         margin: 22px 0 0;
         font-size: 1rem;
         line-height: 1.7;
-        color: rgba(248, 244, 239, 0.9);
+        color: rgba(248, 244, 239, 0.93);
       }
 
       .hero-actions {
@@ -183,15 +227,20 @@
       .button,
       button {
         display: inline-block;
-        border: 0;
+        border: 1px solid transparent;
         padding: 13px 20px;
         cursor: pointer;
         text-decoration: none;
         color: inherit;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        border-radius: 999px;
         transition:
           transform 0.25s ease,
           background 0.25s ease,
-          color 0.25s ease;
+          color 0.25s ease,
+          border-color 0.25s ease,
+          box-shadow 0.25s ease;
       }
 
       .button:hover,
@@ -206,12 +255,13 @@
       .form-actions button {
         background: var(--accent);
         color: #fff;
+        box-shadow: 0 12px 24px rgba(24, 23, 22, 0.2);
       }
 
       .button-secondary {
         color: #fff;
         border: 1px solid rgba(255, 248, 241, 0.42);
-        background: transparent;
+        background: rgba(255, 255, 255, 0.06);
       }
 
       main section {
@@ -222,7 +272,7 @@
         display: grid;
         grid-template-columns: 1.15fr 0.85fr;
         gap: 24px;
-        margin-top: 0;
+        margin-top: 28px;
         padding: 0 32px;
         position: relative;
         z-index: 2;
@@ -232,6 +282,8 @@
       .note-card {
         background: var(--surface);
         border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
       }
 
       .intro-card {
@@ -269,6 +321,7 @@
         padding: 18px;
         background: #faf8f5;
         border: 1px solid var(--line);
+        border-radius: 14px;
       }
 
       .fact strong {
@@ -281,7 +334,7 @@
 
       .note-card {
         padding: 26px;
-        align-self: end;
+        align-self: start;
         background: #fbf9f6;
       }
 
@@ -303,24 +356,27 @@
       .gallery {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 24px;
+        gap: 28px;
       }
 
       .art {
         display: flex;
         flex-direction: column;
         min-height: 100%;
-        background: transparent;
-        border: 0;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 18px;
         overflow: hidden;
         transform: translateY(0);
+        box-shadow: var(--shadow);
         transition:
           transform 0.25s ease,
           box-shadow 0.25s ease;
       }
 
       .art:hover {
-        transform: translateY(-2px);
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-card);
       }
 
       .art-visual {
@@ -328,6 +384,15 @@
         overflow: hidden;
         aspect-ratio: 4 / 5;
         background: #ddd6ce;
+      }
+
+      #originale .art-visual {
+        padding: 14px;
+        background: linear-gradient(145deg, #f6efe4, #f2e8da);
+        border: 1px solid var(--line);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.72),
+          inset 0 -24px 36px rgba(181, 133, 78, 0.08);
       }
 
       .art-visual img {
@@ -338,15 +403,19 @@
         transition: transform 0.5s ease;
       }
 
+      #originale .art-visual img {
+        border: 1px solid rgba(24, 23, 22, 0.12);
+      }
+
       .art:hover .art-visual img {
-        transform: scale(1.05);
+        transform: scale(1.035);
       }
 
       .art-body {
         display: flex;
         flex: 1;
         flex-direction: column;
-        padding: 18px 0 0;
+        padding: 20px 22px 24px;
       }
 
       .art-body h3 {
@@ -356,10 +425,33 @@
         font-weight: 500;
       }
 
+      .ornamentum-title {
+        color: var(--accent-dark) !important;
+        font-weight: 900 !important;
+        font-size: 1.34rem;
+        letter-spacing: 0.01em;
+      }
+
+      .heading-strong {
+        color: var(--accent-dark) !important;
+        font-weight: 800 !important;
+        font-size: clamp(1.75rem, 2.8vw, 2.3rem) !important;
+        letter-spacing: 0.01em !important;
+      }
+
+      .section-head h2.heading-strong {
+        color: var(--accent-dark) !important;
+        font-weight: 800 !important;
+      }
+
       .art-subtitle {
         margin: 0 0 12px;
         color: var(--muted);
         font-size: 0.98rem;
+      }
+
+      .art-subtitle-orange {
+        color: #c56a1d;
       }
 
       .art-description {
@@ -371,6 +463,7 @@
       .meta {
         margin: 0 0 8px;
         color: var(--accent-dark);
+        font-size: 0.95rem;
       }
 
       .meta strong {
@@ -386,8 +479,8 @@
       }
 
       .sold {
-        margin-top: 10px;
-        color: var(--sold);
+        margin-top: 12px;
+        color: #a34332;
         font-weight: 700;
         letter-spacing: 0.08em;
       }
@@ -408,6 +501,8 @@
         padding: 28px;
         background: #fff;
         border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
       }
 
       .artist-quote {
@@ -453,7 +548,7 @@
 
       .footer {
         padding: 24px 32px 36px;
-        border-top: 1px solid var(--line);
+        border-top: 1px solid rgba(24, 23, 22, 0.1);
         color: var(--muted);
         font-size: 0.92rem;
         background: transparent;
@@ -482,6 +577,7 @@
         padding: 26px;
         background: var(--surface-strong);
         box-shadow: 0 28px 60px rgba(24, 23, 22, 0.16);
+        border-radius: 18px;
       }
 
       .popup-content.viewer {
@@ -662,13 +758,17 @@
         }
 
         .hero {
-          min-height: 62vh;
+          min-height: 64vh;
           align-items: center;
-          padding-top: 42px;
+          padding-top: 52px;
         }
 
         .hero::after {
           display: none;
+        }
+
+        .hero-content {
+          padding: 0;
         }
 
         .hero-actions,
@@ -733,7 +833,7 @@
 
       <div class="intro-grid">
         <div class="intro-card">
-          <h2>Malerei mit Charakter</h2>
+          <h2 class="heading-strong">Malerei mit Charakter</h2>
           <p>
             Die Seite ist bewusst ruhig aufgebaut, damit die Werke den Raum
             bekommen, den sie brauchen. Im Mittelpunkt stehen Materialität,
@@ -769,7 +869,7 @@
       <main>
         <section id="originale">
           <div class="section-head">
-            <h2>Originale Werke</h2>
+            <h2 class="heading-strong">Originale Werke</h2>
             <p>
               Alle hier gezeigten Werke sind aktuell verfügbar. Ein Klick auf
               das Bild zeigt dir das Werk größer.
@@ -781,16 +881,16 @@
               <div class="art-visual">
                 <a
                   href="art1.html"
-                  aria-label="Ornamentum Der innere Blick Detailseite öffnen"
+                  aria-label="Ornamentum - Der innere Blick Detailseite öffnen"
                 >
                   <img
                     src="bilder/ornamentum1.jpg"
-                    alt="Ornamentum Der innere Blick"
+                    alt="Ornamentum - Der innere Blick"
                   />
                 </a>
               </div>
               <div class="art-body">
-                <h3>Ornamentum &ndash; Der innere Blick</h3>
+                <h3 class="ornamentum-title">Ornamentum &ndash; Der innere Blick</h3>
                 <p class="art-description">
                   Ein fesselndes Psychogramm, das den Blick in die Tiefen des
                   menschlichen Bewusstseins zeigt. Vielschichtig und voller
@@ -826,8 +926,8 @@
                 </a>
               </div>
               <div class="art-body">
-                <h3>Ornamentum II (Supernova)</h3>
-                <p class="art-subtitle">Vom Weltall inspiriert</p>
+                <h3 class="ornamentum-title">Ornamentum II (Supernova)</h3>
+                <p class="art-subtitle art-subtitle-orange">Vom Weltall inspiriert</p>
                 <p class="art-description">
                   Ein aus dem Kosmos inspiriertes Porträt voller Energie,
                   Ornamentik und leuchtender Symbolik. Goldene Linien, florale
@@ -883,7 +983,7 @@
 
         <section id="verkauft">
           <div class="section-head">
-            <h2>Verkaufte Werke</h2>
+            <h2 class="heading-strong">Verkaufte Werke</h2>
             <p>
               Eine Auswahl bereits verkaufter Arbeiten mit weiteren Ansichten
               und Details der Oberflächen.
@@ -900,7 +1000,7 @@
                 />
               </div>
               <div class="art-body">
-                <h3>Zähmung des Lichts</h3>
+                <h3 class="ornamentum-title">Zähmung des Lichts</h3>
                 <p class="meta">Medium: Acryl, Strukturpaste, Blattgold</p>
                 <p class="meta">Leinwand: 140 x 100 cm</p>
                 <p class="sold">VERKAUFT</p>
@@ -916,7 +1016,7 @@
                 />
               </div>
               <div class="art-body">
-                <h3>Zwischen Genuss und Leidenschaft</h3>
+                <h3 class="ornamentum-title">Zwischen Genuss und Leidenschaft</h3>
                 <p class="meta">Medium: Acryl, Strukturpaste, Blattgold</p>
                 <p class="meta">Leinwand: 120 x 80 cm</p>
                 <p class="sold">VERKAUFT</p>
@@ -932,7 +1032,7 @@
                 />
               </div>
               <div class="art-body">
-                <h3>Diva Toscana</h3>
+                <h3 class="ornamentum-title">Diva Toscana</h3>
                 <p class="meta">Medium: Acryl, Strukturpaste, Blattgold</p>
                 <p class="meta">Leinwand: 120 x 80 cm</p>
                 <p class="sold">VERKAUFT</p>
@@ -948,7 +1048,7 @@
                 />
               </div>
               <div class="art-body">
-                <h3>In der Ruhe liegt die Kraft</h3>
+                <h3 class="ornamentum-title">In der Ruhe liegt die Kraft</h3>
                 <p class="meta">Medium: Acryl, Glas, Strukturpaste</p>
                 <p class="meta">Leinwand: 100 x 100 cm</p>
                 <p class="sold">VERKAUFT</p>
